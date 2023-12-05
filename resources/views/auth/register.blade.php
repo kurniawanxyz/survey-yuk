@@ -18,6 +18,7 @@
     <link rel="shortcut icon" type="image/png" href="{{ asset('favicon.ico') }}" />
     <!-- Core Css -->
     <link  id="themeColors"  rel="stylesheet" href="{{ asset('dist/css/style.min.css') }}" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"></script>
   </head>
   <body>
     <!-- Preloader -->
@@ -41,17 +42,28 @@
                     <img class="mx-auto d-block" src="{{ asset('logo.png') }}" width="120" alt="">
                   <h2 class="mb-5 fs-7 fw-bolder text-center">Selamat Datang Di Survey Yuk</h2>
 
-                  <form action="{{ route('user.login') }}" method="POST" id="loginForm">
+                  <form action="{{ route('user.register') }}" method="POST" id="loginForm">
                     @csrf
                     <div class="mb-3">
+                      <label for="nama" class="form-label">Nama Lengkap</label>
+                      <input type="text" name="nama" class="form-control" id="nama" aria-describedby="nama">
+                    </div>
+
+                    @error('nama')
+                        <script>
+                            toastr.success("tes");
+                        </script>
+                    @enderror
+
+                    <div class="mb-3">
                       <label for="email" class="form-label">Email</label>
-                      <input type="email" class="form-control" id="email" aria-describedby="email">
+                      <input type="email" name="email" class="form-control" id="email" aria-describedby="email">
                     </div>
                     <div class="mb-4">
                       <label for="password" class="form-label">Password</label>
-                      <input type="password" class="form-control" id="password">
+                      <input type="password" name="password" class="form-control" id="password">
                     </div>
-                    <button type="submit" class="btn btn-primary w-100 py-8 mb-4 rounded-2">Sign In</button>
+                    <button type="submit" class="btn btn-primary w-100 py-8 mb-4 rounded-2">Sign Up</button>
                   </form>
                 </div>
               </div>

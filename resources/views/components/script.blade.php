@@ -9,4 +9,3 @@
  <script src="{{ asset('dist/js/sidebarmenu.js') }}"></script>
 
  <script src="{{ asset('dist/js/custom.js') }}"></script>
- <script src="/node_modules/axios/dist/axios.min.js" ></script>

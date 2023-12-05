@@ -1,9 +1,11 @@
 <?php
-
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
 use Throwable;
+use Yoeunes\Toastr\Facades\Toastr as FacadesToastr;
+use Yoeunes\Toastr\Toastr;
 
 class Handler extends ExceptionHandler
 {
@@ -26,5 +28,27 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    /**
+     * Render an exception into an HTTP response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Throwable  $exception
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Throwable
+     */
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof ValidationException) {
+            $errors = $exception->validator->errors()->all();
+            foreach ($errors as $error) {
+                FacadesToastr::error($error, 'Error');
+            }
+            return back()->withInput();
+        }
+
+        return parent::render($request, $exception);
     }
 }

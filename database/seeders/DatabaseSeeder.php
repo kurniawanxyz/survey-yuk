@@ -7,6 +7,8 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
+// use Illuminate\Support\Facades\Hash;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -30,6 +32,7 @@ class DatabaseSeeder extends Seeder
             "email" => "admin@gmail.com",
             'password' => Hash::make("password"),
         ]);
+
         DB::table("users")->insert([
             'nama' => 'Adi Kurniawan',
             "role_id" => 1,
