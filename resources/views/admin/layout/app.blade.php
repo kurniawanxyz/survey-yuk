@@ -38,10 +38,9 @@
       <aside class="left-sidebar">
         <!-- Sidebar scroll-->
         <div>
-          <div class="brand-logo d-flex align-items-center justify-content-between">
-            <a href="index-2.html" class="text-nowrap logo-img">
-              <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/logos/dark-logo.svg" class="dark-logo" width="180" alt="" />
-              <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/logos/light-logo.svg" class="light-logo"  width="180" alt="" />
+          <div class="brand-logo d-flex align-items-center justify-content-center overflow-hidden">
+            <a href="{{ route('admin.dashboard') }}" class="text-nowrap logo-img ">
+              <img src="{{ asset('logo.png') }}" class="mx-auto d-block" style="object-fit: cover" class="" width="100" alt="" />
             </a>
             <div class="close-btn d-lg-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
               <i class="ti ti-x fs-8 text-muted"></i>
@@ -93,11 +92,11 @@
                 </a>
               </li>
               <li class="sidebar-item">
-                <a class="sidebar-link" href="index5.html" aria-expanded="false">
+                <a class="sidebar-link" href="{{ route('admin.group') }}" aria-expanded="false">
                   <span>
                     <i class="ti ti-activity-heartbeat"></i>
                   </span>
-                  <span class="hide-menu">General</span>
+                  <span class="hide-menu">Group</span>
                 </a>
               </li>
               <li class="sidebar-item">
@@ -142,8 +141,7 @@
               </li>
             </ul>
             <div class="d-block d-lg-none">
-              <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/logos/dark-logo.svg" class="dark-logo" width="180" alt="" />
-              <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/logos/light-logo.svg" class="light-logo"  width="180" alt="" />
+              <img src="{{ asset('logo.png') }}" class="mt-1" style="object-fit: cover"  width="70" alt="" />
             </div>
             <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="p-2">

@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('surveis', function (Blueprint $table) {
+        Schema::create('pertanyaans', function (Blueprint $table) {
             $table->id();
-            $table->string("judul");
-            $table->text("deskripsi");
-            $table->foreignId("kreator_id")->references('id')->on('users');
-            $table->boolean("status_pertanyaan")->default(false);
+            $table->foreignId('survei_id')->references('id')->on('surveis')->onDelete('cascade')->onUpdate('cascade');
+            $table->text("text");
+            $table->enum("status",['fav','unfav']);
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('surveis');
+        Schema::dropIfExists('pertanyaans');
     }
 };

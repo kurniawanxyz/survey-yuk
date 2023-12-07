@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GroupController;
+use App\Http\Controllers\PertanyaanController;
 use App\Http\Controllers\SurveiController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,19 +35,28 @@ Route::middleware(['auth','role:2'])->group(function () {
     Route::get('/survei',function(){ return view('admin.survei'); })->name('admin.survei');
     Route::get('/pengguna',function(){ return view('admin.pengguna'); })->name('admin.pengguna');
     Route::get('/favorite',function(){ return view('admin.favorite'); })->name('admin.favorite');
+    Route::get('/group',function(){ return view('admin.group'); })->name('admin.group');
 
     // proses get
     Route::get("/data-survei",[SurveiController::class,'get'])->name('data.survei');
     Route::get("/data-edit-survei/{id}",[SurveiController::class,'show'])->name('data.edit-survei');
+    Route::get("/data-pertanyaan/{id}",[PertanyaanController::class,'get']);
+    Route::get("/data-group",[GroupController::class,'get']);
+    Route::get('/data-detail-group/{id}',[GroupController::class,'show']);
 
     // proses create
     Route::post('/create-survei',[SurveiController::class,'create'])->name('create.survei');
+    Route::post('/create-pertanyaan',[PertanyaanController::class,'create'])->name('create.pertanyaan');
+    Route::post('/create-group',[GroupController::class,'create'])->name("create.group");
 
     // proses edit
     Route::put('/update-survei/{id}',[SurveiController::class,'edit']);
+    Route::put('/update-pertanyaan/{id}',[PertanyaanController::class,'edit']);
+    Route::put('/update-group/{id}',[GroupController::class,'edit']);
 
     // proses delete
     Route::delete('/delete-survei/{id}',[SurveiController::class,'delete']);
+    Route::delete('/delete-pertanyaan/{id}',[PertanyaanController::class,'delete']);
 
 });
 

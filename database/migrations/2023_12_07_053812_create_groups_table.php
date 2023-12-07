@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('surveis', function (Blueprint $table) {
+        Schema::create('groups', function (Blueprint $table) {
             $table->id();
-            $table->string("judul");
+            $table->string("nama");
             $table->text("deskripsi");
-            $table->foreignId("kreator_id")->references('id')->on('users');
-            $table->boolean("status_pertanyaan")->default(false);
+            $table->string("code")->unique();
+            $table->foreignId("kreator_id")->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('surveis');
+        Schema::dropIfExists('groups');
     }
 };
