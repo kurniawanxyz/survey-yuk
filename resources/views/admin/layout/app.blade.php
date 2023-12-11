@@ -19,6 +19,8 @@
     <!-- Owl Carousel  -->
     <link rel="stylesheet" href="{{ asset('dist/libs/owl.carousel/dist/assets/owl.carousel.min.css') }}">
 
+    @yield('link')
+
     <!-- Core Css -->
     <link  id="themeColors"  rel="stylesheet" href="{{ asset('dist/css/style.min.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -100,11 +102,11 @@
                 </a>
               </li>
               <li class="sidebar-item">
-                <a class="sidebar-link" href="index6.html" aria-expanded="false">
+                <a class="sidebar-link" href="{{ route('admin.rekap') }}" aria-expanded="false">
                   <span>
                     <i class="ti ti-playlist"></i>
                   </span>
-                  <span class="hide-menu">Music</span>
+                  <span class="hide-menu">Rekap Nilai</span>
                 </a>
               </li>
             </ul>

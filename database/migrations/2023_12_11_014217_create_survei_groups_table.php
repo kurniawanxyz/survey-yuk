@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('roles', function (Blueprint $table) {
-            $table->id();
-            $table->enum("status",["pengguna","surveyor"]);
+        Schema::create('survei_groups', function (Blueprint $table) {
+            $table->foreignId('survei_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('group_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('survei_groups');
     }
 };

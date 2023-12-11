@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Survei extends Model
@@ -24,5 +25,10 @@ class Survei extends Model
     {
         return $this->hasMany(Pertanyaan::class);
     }
-    
+
+    public function groups():BelongsToMany
+    {
+        return $this->belongsToMany(Group::class,"survei_groups");
+    }
+
 }

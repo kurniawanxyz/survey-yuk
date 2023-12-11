@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Group;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -72,8 +73,13 @@ class GroupController extends Controller
 
     protected function show($id)
     {
-        $group = Group::findOrFail($id);
+        $group = Group::with('users')->findOrFail($id);
         return response()->json($group);
+    }
+
+    protected function showGroupSurvei()
+    {
+        $group = Group::where('kreator_id')
     }
 
 }

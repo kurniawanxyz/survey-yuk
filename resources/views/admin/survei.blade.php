@@ -1,5 +1,9 @@
 @extends('admin.layout.app')
 
+@section('link')
+    <link rel="stylesheet" href="{{ asset('dist/libs/select2/dist/css/select2.min.css') }}">
+@endsection
+
 @section('content')
 
 
@@ -50,6 +54,26 @@
           <div class="col-12 mt-3">
               <label class="form-label" for="Deskripsi">Deskripsi Survei</label>
               <textarea class="form-control" style="resize: none" name="deskripsi" id="Deskripsi" cols="10" rows="10"></textarea>
+          </div>
+          <div class="col-12 mt-3">
+            <label class="form-label" for="visibility">Visibility</label>
+            <select class="form-control form-select" name="visibility" id="visibility">
+                <option value="" selected disabled >Pilih </option>
+                <option value="public">Public</option>
+                <option value="private">Private</option>
+            </select>
+          </div>
+          <div class="col-12 mt-3 option-private">
+            <label class="form-label" for="groupSurvei">Group</label><br>
+            <select name="groupSurvei[]" id="groupSurvei"
+            class="select2 form-select select2-hidden-accessible"
+            multiple="" data-select2-id="groupSurvei"
+            tabindex="-1" aria-hidden="true">
+                <option value="">A</option>
+                <option value="">A</option>
+                <option value="">A</option>
+                <option value="">A</option>
+            </select>
           </div>
         </form>
       </div>
@@ -161,6 +185,9 @@
 @section('script')
   <script src="{{ asset('utils/handleFormatDate.js') }}"></script>
   <script src="{{ asset('dist/libs/jquery.repeater/jquery.repeater.min.js') }}"></script>
+  <script src="{{ asset('dist/libs/select2/dist/js/select2.min.js') }}"></script>
+  <script src="{{ asset('dist/libs/select2/dist/js/select2.full.min.js') }}"></script>
+  <script src="{{ asset('dist/js/forms/select2.init.js') }}"></script>
 
   <script>
         get();
@@ -393,8 +420,8 @@ setTimeout(() => {
                         <div class="mb-3">
                         <select class="form-select" id="status-${data.id}" name="status-pertama">
                             <option disabled selected>Status</option>
-                            <option ${ data.status == "fav" ? "selected" : "" } value="fav">Favorite</option>
-                            <option ${ data.status == "unfav" ? "selected" : "" } value="unfav">Tidak Favorite</option>
+                            <option ${ data.status == "fav" ? "selected" : "" } value="fav">Favorable</option>
+                            <option ${ data.status == "unfav" ? "selected" : "" } value="unfav">UnFavoable</option>
                         </select>
                         </div>
                     </div>
@@ -444,8 +471,8 @@ setTimeout(() => {
                         <div class="mb-3">
                         <select class="form-select" id="status-pertama" name="status-pertama">
                             <option disabled selected>Status</option>
-                            <option value="fav">Favorite</option>
-                            <option value="unfav">Tidak Favorite</option>
+                            <option value="fav">Favorable</option>
+                            <option value="unfav">UnFavorable</option>
                         </select>
                         </div>
                     </div>
@@ -491,6 +518,22 @@ setTimeout(() => {
             })
 
         }
+
+        // $("#groupSurvei").select2()
+
+        $("#visibility").on('change', function() {
+  const status_visibility = $("#visibility").val();
+
+  if (status_visibility === "private") {
+
+        axios.get()
+        .then()
+
+        $(".option-private").removeClass("d-none")
+    } else {
+        $(".option-private").addClass("d-none")
+  }
+});
 
 
 

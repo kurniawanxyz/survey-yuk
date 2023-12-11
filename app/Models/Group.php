@@ -24,4 +24,9 @@ class Group extends Model
         return $this->belongsTo(User::class,'kreator_id');
     }
 
+    public function surveis():BelongsToMany
+    {
+        return $this->belongsToMany(Survei::class,"user_groups");
+    }
+
 }

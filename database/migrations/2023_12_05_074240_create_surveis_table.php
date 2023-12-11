@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text("deskripsi");
             $table->foreignId("kreator_id")->references('id')->on('users');
             $table->boolean("status_pertanyaan")->default(false);
+            $table->enum("visibility",["public,private"]);
             $table->timestamps();
         });
     }

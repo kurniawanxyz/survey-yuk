@@ -13,13 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider and all of them will
-|| be assigned to the "web" middleware group. Make something great!
-
+| be assigned to the "web" middleware group. Make something great!
+|
 */
 
 Route::middleware(['guest'])->group(function(){
 
-    Route::get('/',function(){ return view('landing-page'); })->name('page.landing');
+    Route::get('/',function(){ return redirect()->route('page.login'); })->name('page.landing');
     Route::get('/login', function () { return view('auth.login'); })->name("page.login");
     Route::get('/register', function () { return view('auth.register'); })->name("page.register");
 
@@ -36,6 +36,7 @@ Route::middleware(['auth','role:2'])->group(function () {
     Route::get('/pengguna',function(){ return view('admin.pengguna'); })->name('admin.pengguna');
     Route::get('/favorite',function(){ return view('admin.favorite'); })->name('admin.favorite');
     Route::get('/group',function(){ return view('admin.group'); })->name('admin.group');
+    Route::get('/rekap-nilai',function(){ return view('admin.rekap'); })->name('admin.rekap');
 
     // proses get
     Route::get("/data-survei",[SurveiController::class,'get'])->name('data.survei');
@@ -43,6 +44,7 @@ Route::middleware(['auth','role:2'])->group(function () {
     Route::get("/data-pertanyaan/{id}",[PertanyaanController::class,'get']);
     Route::get("/data-group",[GroupController::class,'get']);
     Route::get('/data-detail-group/{id}',[GroupController::class,'show']);
+    Route::get("/data-groupSurvei",[GroupController::class,'']);
 
     // proses create
     Route::post('/create-survei',[SurveiController::class,'create'])->name('create.survei');

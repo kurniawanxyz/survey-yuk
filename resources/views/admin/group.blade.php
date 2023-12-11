@@ -32,6 +32,20 @@
         </div>
         <div class="modal-body">
 
+            <div class="row">
+                <div class="col-12">
+                    <table id="tabel-anggota" class="table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
 
         </div>
         <div class="modal-footer">
@@ -318,15 +332,39 @@
             axios.get("/data-detail-group/"+id)
             .then((res)=>{
                 const group = res.data;
+                const anggota = res.data.users;
+                console.log(anggota);
                 $("#nama-group").text(group.nama)
                 $("#deskripsi-group").text(group.deskripsi)
                 $("#group-code").text(group.code)
+
+                $.each(anggota,(index,user)=>{
+                    const row = $("<tr>").addClass(`anggota-`+user.id)
+                    .html(`
+
+                    <td>
+                        ${index+1}
+                    </td>
+                    <td>
+                        ${user.nama}
+                    </td>
+                   <td>
+                    <button class="btn btn-danger">Kick</button>
+                    </td>
+
+                    `);
+
+                    $("#tabel-anggota").append(row);
+                })
+
 
             })
             .catch((err)=>{
 
             })
         }
+
+
 
     </script>
 @endsection
