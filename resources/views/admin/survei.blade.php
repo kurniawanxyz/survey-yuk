@@ -2,11 +2,17 @@
 
 @section('link')
     <link rel="stylesheet" href="{{ asset('dist/libs/select2/dist/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/libs/prismjs/themes/prism-okaidia.min.css')}}">
+     {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> --}}
 @endsection
 
 @section('content')
 
-
+<style>
+    .select2-container{
+        z-index: 100000000;
+    }
+</style>
 
 <div class="modal fade" id="modalBuatPertanyaan" tabindex="-1" aria-labelledby="bs-example-modal-lg" style="display: none;" aria-hidden="true">
   <div class="modal-dialog modal-xl">
@@ -28,10 +34,9 @@
         </button>
       </div>
     </div>
-    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-dialog -->
 </div>
+
 
 
 
@@ -63,18 +68,13 @@
                 <option value="private">Private</option>
             </select>
           </div>
-          <div class="col-12 mt-3 option-private">
-            <label class="form-label" for="groupSurvei">Group</label><br>
-            <select name="groupSurvei[]" id="groupSurvei"
-            class="select2 form-select select2-hidden-accessible"
-            multiple="" data-select2-id="groupSurvei"
-            tabindex="-1" aria-hidden="true">
-                <option value="">A</option>
-                <option value="">A</option>
-                <option value="">A</option>
-                <option value="">A</option>
-            </select>
-          </div>
+
+          <div class="col-12 my-3 option-private d-flex flex-column ">
+            <label class="form-label" for="groupSurvei">Group</label>
+            <select style="" name="groupSurvei[]" id="groupSurvei" class="select2 form-control select2-hidden-accessible " multiple="" data-select2-id="groupSurvei" tabindex="-1" aria-hidden="true">
+
+             </select>
+            </div>
         </form>
       </div>
       <div class="modal-footer">
@@ -90,6 +90,8 @@
   </div>
   <!-- /.modal-dialog -->
 </div>
+
+
 
 <div id="editSurvei" class="modal fade" tabindex="-1" aria-labelledby="editSurveiLabel" style="display: none;" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg">
@@ -111,6 +113,21 @@
               <label class="form-label" for="edit-Deskripsi">Deskripsi Survei</label>
               <textarea class="form-control" style="resize: none" name="deskripsi" id="edit-Deskripsi" cols="10" rows="10"></textarea>
           </div>
+          <div class="col-12 mt-3">
+            <label class="form-label" for="visibilityEdit">Visibility</label>
+            <select class="form-control form-select" name="visibilityEdit" id="visibilityEdit">
+                <option value="" selected disabled >Pilih </option>
+                <option value="public">Public</option>
+                <option value="private">Private</option>
+            </select>
+          </div>
+
+          <div class="col-12 my-3 option-private-edit d-flex flex-column ">
+            <label class="form-label" for="groupSurvei">Group</label>
+            <select style="" name="groupSurveiEdit[]" id="groupSurveiEdit" class="select2 form-control select2-hidden-accessible " multiple="" data-select2-id="groupSurvei" tabindex="-1" aria-hidden="true">
+
+             </select>
+            </div>
         </form>
       </div>
       <div class="modal-footer">
@@ -172,7 +189,7 @@
   <div class="row ">
       <div class="col-6"></div>
       <div class="col-6 d-flex justify-content-end">
-          <button data-bs-toggle="modal" data-bs-target="#tambahSurvei" class="btn btn-primary me-2">
+          <button data-bs-toggle="modal" data-bs-target="#tambahSurvei" class="btn btn-tambah-survei btn-primary me-2">
               Buat survei
           </button>
       </div>
@@ -182,6 +199,7 @@
   </div>
 
 @endsection
+
 @section('script')
   <script src="{{ asset('utils/handleFormatDate.js') }}"></script>
   <script src="{{ asset('dist/libs/jquery.repeater/jquery.repeater.min.js') }}"></script>
@@ -189,6 +207,7 @@
   <script src="{{ asset('dist/libs/select2/dist/js/select2.full.min.js') }}"></script>
   <script src="{{ asset('dist/js/forms/select2.init.js') }}"></script>
 
+  {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script> --}}
   <script>
         get();
         function get(){
@@ -199,7 +218,7 @@
                if (survei.length === 0) {
                 $("#row-survei").html(
                     `
-                    <h1 class="text-center text-secondary">Not Found</h1>
+                    <h1 class="text-center text-secondary">Belum memiliki Survei</h1>
                     `
                 )
                } else {
@@ -263,7 +282,9 @@
         $(".btn-submit").click(function(){
             const judul = $("#judul").val();
             const deskripsi = $("#Deskripsi").val();
-            axios.post("{{ route('create.survei') }}",{judul,deskripsi})
+            const group = $("#groupSurvei").val();
+            const visibility = $("#visibility").val();
+            axios.post("{{ route('create.survei') }}",{judul,deskripsi,group,visibility})
             .then((res)=>{
                 $("#tambahSurvei").fadeOut();
                 $(".modal-backdrop").hide();
@@ -285,12 +306,25 @@
 
 
         function getDataSurvei(id){
+            $("#groupSurveiEdit").empty()
             axios.get(`/data-edit-survei/${id}`)
+
             .then((res)=>{
-                const survei = res.data;
+                const survei = res.data.survei;
+                const group = res.data.group;
+                // console.log(survei,group);
                 $("#edit-judul").val(survei.judul)
                 $("#edit-Deskripsi").val(survei.deskripsi)
                 $("#editSurvei").attr("data-survei_id",id)
+                $("#visibilityEdit").val(survei.visibility)
+
+
+                $.each(group,(index,data)=>{
+                const element = $("<option>").val(data.id).text(data.nama).attr("selected",data.nama === survei.groups[index].nama);
+                $("#groupSurveiEdit").append(element)
+                });
+
+
             })
             .catch((err)=>{
                 console.log(err);
@@ -298,11 +332,13 @@
         }
 
         $(".btn-edit-submit").click(function(){
-            const judul = $("#edit-judul").val()
-            const deskripsi = $("#edit-Deskripsi").val()
+            const judul = $("#edit-judul").val();
+            const deskripsi = $("#edit-Deskripsi").val();
+            const visibility = $("#visibilityEdit").val();
+            const group = $("#groupSurveiEdit").val()
             const id = $("#editSurvei").attr("data-survei_id");
 
-            axios.put("/update-survei/"+id,{judul,deskripsi})
+            axios.put("/update-survei/"+id,{judul,deskripsi,visibility,group})
             .then((res)=>{
                 $("#editSurvei").fadeOut();
                 $(".modal-backdrop").hide();
@@ -511,6 +547,7 @@ setTimeout(() => {
             .then((res)=>{
                 $("#buat-pertanyaan").trigger('reset');
                 getPertanyaan(id);
+                get();
                 console.log(res.data);
             })
             .catch((err)=>{
@@ -519,21 +556,33 @@ setTimeout(() => {
 
         }
 
-        // $("#groupSurvei").select2()
+        $("#groupSurvei").select2()
+        $("#groupSurveiEdit").select2()
 
-        $("#visibility").on('change', function() {
-  const status_visibility = $("#visibility").val();
 
-  if (status_visibility === "private") {
 
-        axios.get()
-        .then()
 
-        $(".option-private").removeClass("d-none")
-    } else {
-        $(".option-private").addClass("d-none")
-  }
-});
+
+        $(".btn-tambah-survei").click(function(){
+            axios.get("/data-groupSurvei")
+            .then((res)=>{
+                const group = res.data;
+
+                $("#groupSurvei").empty()
+                $.each(group,(index,data)=>{
+                    const element = $("<option>").val(data.id).text(data.nama);
+                    // console.log(data);
+                    $("#groupSurvei").append(element)
+                })
+
+            })
+            .catch((err)=>{
+
+            })
+        })
+
+
+
 
 
 

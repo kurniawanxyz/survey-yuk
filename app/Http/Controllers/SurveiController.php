@@ -6,9 +6,12 @@ use App\Models\Survei;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Models\SurveiGroup;
+use App\Models\Group;
 
 class SurveiController extends Controller
 {
+
 
     protected function get()
     {
@@ -18,8 +21,12 @@ class SurveiController extends Controller
 
     protected function show($id)
     {
-        $survei = Survei::find($id);
-        return response()->json($survei);
+        $survei = Survei::with('groups')->find($id);
+        $group = Group::where('kreator_id',Auth::user()->id)->get();
+        return response()->json([
+            "survei" => $survei,
+            "group" => $group,
+        ]);
     }
 
     protected function create(Request $request)
@@ -39,11 +46,21 @@ class SurveiController extends Controller
         }
 
 
-        Survei::create([
-            "judul" => $request->judul,
-            "deskripsi" => $request->deskripsi,
-            "kreator_id" => Auth::user()->id,
-        ]);
+
+
+        $survei = new Survei;
+        $survei->judul = $request->judul;
+        $survei->deskripsi = $request->deskripsi;
+        $survei->kreator_id = Auth::user()->id;
+        $survei->visibility = $request->visibility;
+        $survei->save();
+
+        foreach ($request->group as $i => $row) {
+            SurveiGroup::create([
+                "survei_id" => $survei->id,
+                "group_id" => $row,
+            ]);
+        }
 
         return response()->json(["message"=>"Congratulations on successfully creating a survey!"]);
     }
@@ -52,7 +69,8 @@ class SurveiController extends Controller
     {
         $validator = Validator::make($request->all(), [
             "judul" => "max:50|string",
-            "deskripsi" => "max:1000|string"
+            "deskripsi" => "max:1000|string",
+            "visibility" => "string"
         ]);
 
         if($validator->fails()){
@@ -66,7 +84,27 @@ class SurveiController extends Controller
         $survei = Survei::find($id);
         $survei->judul = $request->judul;
         $survei->deskripsi = $request->deskripsi;
+        $survei->visibility = $request->visibility;
+
+        $currentGroup = $survei->groups->pluck('id')->toArray();
+        $groupNow = $request->group;
+
+        $groupToRemove = array_diff($currentGroup,$groupNow);
+        $groupToAdd = array_diff($groupNow,$currentGroup);
+        // dd($groupToAdd);
+        foreach ($groupToRemove as $key => $data) {
+            SurveiGroup::where("survei_id",$survei->id)->where('group_id',$data)->delete();
+        }
+        foreach ($groupToAdd as $key => $data) {
+            SurveiGroup::create([
+                "survei_id" => $survei->id,
+                "group_id" => $data,
+            ]);
+        }
+
         $survei->save();
+
+
 
 
         return response()->json(["message"=>"Congratulations on successfully edit a survey!"]);

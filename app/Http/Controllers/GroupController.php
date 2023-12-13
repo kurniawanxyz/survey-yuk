@@ -12,6 +12,8 @@ class GroupController extends Controller
 {
     //
 
+    
+
     protected function get()
     {
         $group = Group::with('kreator')->where("kreator_id",Auth::user()->id)->get();
@@ -79,7 +81,8 @@ class GroupController extends Controller
 
     protected function showGroupSurvei()
     {
-        $group = Group::where('kreator_id')
+        $group = Group::where('kreator_id',Auth::user()->id)->get();
+        return response()->json($group);
     }
 
 }

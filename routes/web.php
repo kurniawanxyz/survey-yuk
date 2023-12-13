@@ -44,7 +44,7 @@ Route::middleware(['auth','role:2'])->group(function () {
     Route::get("/data-pertanyaan/{id}",[PertanyaanController::class,'get']);
     Route::get("/data-group",[GroupController::class,'get']);
     Route::get('/data-detail-group/{id}',[GroupController::class,'show']);
-    Route::get("/data-groupSurvei",[GroupController::class,'']);
+    Route::get("/data-groupSurvei",[GroupController::class,'showGroupSurvei']);
 
     // proses create
     Route::post('/create-survei',[SurveiController::class,'create'])->name('create.survei');
