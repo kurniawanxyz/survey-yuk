@@ -320,8 +320,8 @@
 
 
                 $.each(group,(index,data)=>{
-                const element = $("<option>").val(data.id).text(data.nama).attr("selected",data.nama === survei.groups[index].nama);
-                $("#groupSurveiEdit").append(element)
+                  const element = $("<option>").val(data.id).text(data.nama).attr("selected",data.nama === survei.groups[index].nama);
+                  $("#groupSurveiEdit").append(element)
                 });
 
 

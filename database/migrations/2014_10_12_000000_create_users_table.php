@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('role_id')->constrained();
             $table->boolean("permission")->default(false);
             $table->timestamp('email_verified_at')->nullable();
+            $table->string("foto-profil")->default("default.jpg");
             $table->rememberToken();
             $table->timestamps();
         });

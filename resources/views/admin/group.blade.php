@@ -233,7 +233,6 @@
                         $.each(group,(index,data)=>{
 
                             const elementGroup = `
-
                             <div class="col-md-6 col-lg-4 d-flex align-items-stretch">
                                 <div class="card w-100">
                                     <div class="p-4 d-flex align-items-stretch h-100">
@@ -268,7 +267,6 @@
                             </div>
 
                             `
-
                             $(".row-group").append(elementGroup)
 
                         })
@@ -287,7 +285,8 @@
 
                 axios.post("/create-group",{nama,deskripsi})
                 .then((res)=>{
-                    console.log(res.data)
+                   get()
+                   $("#modalBuatGroup").modal('toggle');
                 })
                 .catch((err)=>{
                     for (let i = 0; i < err.response.data.errors.length; i++) {

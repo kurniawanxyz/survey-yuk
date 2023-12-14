@@ -4,6 +4,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\PertanyaanController;
 use App\Http\Controllers\SurveiController;
+use App\Http\Controllers\PenggunaController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,10 +32,10 @@ Route::middleware(['guest'])->group(function(){
 
 Route::middleware(['auth','role:2'])->group(function () {
 
-    // dashboard-admin
-    Route::get('/dashboard-admin',function(){ return view('admin.dashboard'); })->name('admin.dashboard');
+    // dashboard-surveyor
+    Route::get('/dashboard-surveyor',function(){ return view('admin.dashboard'); })->name('admin.dashboard');
     Route::get('/survei',function(){ return view('admin.survei'); })->name('admin.survei');
-    Route::get('/pengguna',function(){ return view('admin.pengguna'); })->name('admin.pengguna');
+    Route::get('/pengguna',function(){ if(Auth::user()->permission == 0){ return abort(404); } return view('admin.pengguna'); })->name('admin.pengguna');
     Route::get('/favorite',function(){ return view('admin.favorite'); })->name('admin.favorite');
     Route::get('/group',function(){ return view('admin.group'); })->name('admin.group');
     Route::get('/rekap-nilai',function(){ return view('admin.rekap'); })->name('admin.rekap');
@@ -45,11 +47,13 @@ Route::middleware(['auth','role:2'])->group(function () {
     Route::get("/data-group",[GroupController::class,'get']);
     Route::get('/data-detail-group/{id}',[GroupController::class,'show']);
     Route::get("/data-groupSurvei",[GroupController::class,'showGroupSurvei']);
+    Route::get("/data-user",[PenggunaController::class,'getDataUser']);
 
     // proses create
     Route::post('/create-survei',[SurveiController::class,'create'])->name('create.survei');
     Route::post('/create-pertanyaan',[PertanyaanController::class,'create'])->name('create.pertanyaan');
     Route::post('/create-group',[GroupController::class,'create'])->name("create.group");
+    Route::post('/tambah-user', [PenggunaController::class,'createUser'])->name("create.user");
 
     // proses edit
     Route::put('/update-survei/{id}',[SurveiController::class,'edit']);

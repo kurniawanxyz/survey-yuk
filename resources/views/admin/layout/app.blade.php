@@ -77,6 +77,7 @@
                   <span class="hide-menu">Survei</span>
                 </a>
               </li>
+              @if (Auth::user()->permission == 1 )
               <li class="sidebar-item">
                 <a class="sidebar-link" href="{{route('admin.pengguna')}}" aria-expanded="false">
                   <span>
@@ -85,6 +86,7 @@
                   <span class="hide-menu">Pengguna</span>
                 </a>
               </li>
+              @endif
               <li class="sidebar-item">
                 <a class="sidebar-link" href="{{ route('admin.favorite') }}" aria-expanded="false">
                   <span>

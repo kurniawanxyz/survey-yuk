@@ -12,7 +12,7 @@ class GroupController extends Controller
 {
     //
 
-    
+
 
     protected function get()
     {
@@ -22,6 +22,7 @@ class GroupController extends Controller
 
     protected function create(Request $request)
     {
+
 
         $validator = Validator::make($request->all(), [
             "nama" => "max:50|string|required",
