@@ -25,6 +25,7 @@
     <link  id="themeColors"  rel="stylesheet" href="{{ asset('dist/css/style.min.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
   </head>
+  @yield('style')
   <body>
     <!-- Preloader -->
     <div class="preloader">
@@ -87,14 +88,14 @@
                 </a>
               </li>
               @endif
-              <li class="sidebar-item">
+              {{-- <li class="sidebar-item">
                 <a class="sidebar-link" href="{{ route('admin.favorite') }}" aria-expanded="false">
                   <span>
                     <i class="ti ti-cpu"></i>
                   </span>
                   <span class="hide-menu">Favorite</span>
                 </a>
-              </li>
+              </li> --}}
               <li class="sidebar-item">
                 <a class="sidebar-link" href="{{ route('admin.group') }}" aria-expanded="false">
                   <span>

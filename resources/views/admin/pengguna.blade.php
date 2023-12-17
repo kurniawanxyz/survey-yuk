@@ -2,8 +2,29 @@
 
 @section('content')
 
+
+<div class="modal fade" id="modalDeleteSurveyor" tabindex="-1" aria-labelledby="vertical-center-modal" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content modal-filled bg-light-warning">
+        <div class="modal-body p-4">
+          <div class="text-center text-warning">
+            <i class="ti ti-alert-octagon fs-7"></i>
+            <h4 class="mt-2">Peringatan !!</h4>
+            <p class="mt-3">
+              Kamu akan menghapus data surveyor mulai dari user sampai dengan survey dan penilaianya yang tidak akan bisa dipulihkan. Yakin ?
+            </p>
+            <button type="button" class="btn btn-light my-2 btn-delete-surveyor" data-bs-dismiss="modal">
+              Continue
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+  </div>
+
 <div id="tambahUser" class="modal fade" tabindex="-1" aria-labelledby="bs-example-modal-md" style="display: none;" aria-hidden="true">
-    <form action="{{ route('create.user') }}" method="post" id="formTambahUser" enctype="multipart/form-data">
+    <form method="post" id="formTambahUser" enctype="multipart/form-data">
         @csrf
         <div class="modal-dialog modal-dialog-scrollable modal-lg">
       <div class="modal-content">
@@ -14,13 +35,6 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <div class="my-3 d-flex flex-column">
-                <label class="form-label " for="foto-profil">
-                    <img width="100" height="100" style="object-fit: cover" class="profile-pengguna rounded-circle mx-auto d-block cursor-pointer" src="{{asset('default.jpg')}}" alt="">
-                    <p class="text-center">Foto profile</p>
-                </label>
-                <input class="form-control d-none" type="file" name="fotoProfile" id="foto-profil" placeholder="Adi Kurniawan">
-            </div>
             <div class="my-3 d-flex flex-column">
                 <label class="form-label" for="nama">Nama</label>
                 <input class="form-control" type="text" name="nama" id="nama" placeholder="Adi Kurniawan">
@@ -38,7 +52,7 @@
           <button type="button" class="btn btn-light-danger text-danger font-medium waves-effect" data-bs-dismiss="modal">
             Close
           </button>
-          <button type="submit" class="btn btn-light-primary text-primary font-medium waves-effect" data-bs-dismiss="modal">
+          <button type="button" class="btn-tambah-user btn btn-light-primary text-primary font-medium waves-effect">
             Save changes
           </button>
         </div>
@@ -49,7 +63,7 @@
     </form>
 </div>
 <div id="tambahSurveyor" class="modal fade" tabindex="-1" aria-labelledby="bs-example-modal-md" style="display: none;" aria-hidden="true">
-    <form action="{{ route('create.user') }}" method="post" id="formTambahSurveyor" enctype="multipart/form-data">
+    <form  method="post" id="formTambahSurveyor" enctype="multipart/form-data">
         @csrf
         <div class="modal-dialog modal-dialog-scrollable modal-lg">
       <div class="modal-content">
@@ -60,13 +74,6 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <div class="my-3 d-flex flex-column">
-                <label class="form-label " for="foto-profil">
-                    <img width="100" height="100" style="object-fit: cover" class="profile-surveyor rounded-circle mx-auto d-block cursor-pointer" src="{{asset('default.jpg')}}" alt="">
-                    <p class="text-center">Foto profile</p>
-                </label>
-                <input class="form-control d-none" type="file" name="fotoProfileSurveyor" id="fotoprofilSurveyor" placeholder="Adi Kurniawan">
-            </div>
             <div class="my-3 d-flex flex-column">
                 <label class="form-label" for="nama">Nama</label>
                 <input class="form-control" type="text" name="namaSurveyor" id="namaSurveyor" placeholder="Adi Kurniawan">
@@ -84,7 +91,7 @@
           <button type="button" class="btn btn-light-danger text-danger font-medium waves-effect" data-bs-dismiss="modal">
             Close
           </button>
-          <button type="submit" class="btn btn-light-primary text-primary font-medium waves-effect" data-bs-dismiss="modal">
+          <button type="button" class="btn-tambah-surveyor btn btn-light-primary text-primary font-medium waves-effect">
             Save changes
           </button>
         </div>
@@ -236,12 +243,6 @@
 
 
 
-$('#tabel-surveyor').DataTable({
-    info: false,
-    ordering: false,
-    paging: false,
-    order: [[3, 'desc']]
-});
 
 $('#tabel-persetujuan').DataTable({
     info: false,
@@ -251,7 +252,7 @@ $('#tabel-persetujuan').DataTable({
 });
 
 getUser();
-
+getSurveyor();
 function getUser(){
     axios.get("/data-user")
     .then((res)=>{
@@ -276,48 +277,112 @@ function getUser(){
     })
 }
 
-$('#tabel-pengguna').DataTable({
-  info: false,
-    ordering: false,
-    paging: false,
-    order: [[3, 'desc']]
-});
-
-
-function readURL(input,p) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            $(p)
-                .attr('src', e.target.result);
-        };
-
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-$(document).ready(function () {
-    $("#foto-profil").change(function () {
-        readURL(this,'.profile-pengguna');
-    });
-
-    $("#fotoProfilSurveyor").change(function () {
-        readURL(this,'.profile-surveyor');
-    });
-});
-
-$("#formTambahUser").submit(function(e){
-    e.preventDefault();
-    let formData = new FormData(this);
-
-    axios.post(this.action,formData)
-    .then((res)=>{
-        getUser();
-        $(this).trigger("reset");
+function handlePermission(status,id){
+    axios.put("/update-permission",{status,id})
+    .then(res=>{
+        getSurveyor()
         toastr.success(res.data.message)
     })
+    .catch(err=>{
+        for (let i = 0; i < err.response.data.errors.length; i++) {
+                const element = err.response.data.errors[i];
+                toastr.error(element)
+        }
+    })
+}
+
+
+
+function getSurveyor(){
+    axios.get("/data-surveyor")
+    .then((res)=>{
+        $("#tabel-surveyor tbody").empty()
+      const user = res.data;
+
+      $.each(user,(index,data)=>{
+        let button = ""
+        console.log(data)
+        if(data.permission){
+            if(data.id != 1){
+                button = `
+                <button onclick="handlePermission('${data.permission}','${data.id}')" class="btn btn-danger">
+                    Delete Permission
+                </button>
+                `
+            }
+        }else{
+            button = `
+            <button onclick="handlePermission('${data.permission}','${data.id}')" class="btn btn-success">
+                Give Permission
+            </button>
+            `
+        }
+        let btnDelete = '';
+        if(data.id != 1){
+            btnDelete = `
+            <button onclick="modalDelete('${data.id}')" data-bs-toggle="modal" data-bs-target="#modalDeleteSurveyor" class="border-0 p-0 text-danger bg-transparent ml-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="currentColor" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z"/></svg>
+            </button>
+            `
+        }
+
+            const element = `
+            <tr>
+                <td>${index+1}</td>
+                <td>${data.nama}</td>
+                <td>${data.email}</td>
+                <td>
+                    ${button}
+                    ${btnDelete}
+                </td>
+            </tr>
+            `
+            $("#tabel-surveyor tbody").append(element);
+      })
+
+    })
     .catch((err)=>{
+      console.log(err);
+    })
+}
+
+function modalDelete(id){
+    console.log(id);
+    $("#modalDeleteSurveyor").attr("data-user_id",id);
+}
+
+$(".btn-delete-surveyor").click(function(){
+    const id =  $("#modalDeleteSurveyor").attr("data-user_id");
+    axios.delete("/delete-surveyor/"+id)
+    .then(res=>{
+        console.log(res.data)
+        getSurveyor()
+        toastr.success(res.data.message)
+    })
+    .catch(err=>{
+        console.log(err)
+        for (let i = 0; i < err.response.data.errors.length; i++) {
+                const element = err.response.data.errors[i];
+                toastr.error(element)
+        }
+    })
+})
+
+
+$(".btn-tambah-surveyor").click(function(){
+
+    const nama = $("#namaSurveyor").val();
+    const email = $("#emailSurveyor").val();
+    const password = $("#passwordSurveyor").val();
+
+    axios.post("/tambah-surveyor",{nama,email,password})
+    .then(res=>{
+        getSurveyor();
+        $("#tambahSurveyor").modal("toggle");
+        $("#formTambahSurveyor").trigger("reset");
+        toastr.success(res.data.message)
+    })
+    .catch(err=>{
         for (let i = 0; i < err.response.data.errors.length; i++) {
                 const element = err.response.data.errors[i];
                 toastr.error(element)
@@ -325,6 +390,45 @@ $("#formTambahUser").submit(function(e){
     })
 
 })
+
+$(".btn-tambah-user").click(function(){
+
+    const nama = $("#nama").val();
+    const email = $("#email").val();
+    const password = $("#password").val();
+
+    axios.post("/tambah-user",{nama,email,password})
+    .then(res=>{
+        getUser();
+        $("#tambahUser").modal("toggle");
+        $("#formTambahUser").trigger("reset");
+        toastr.success(res.data.message)
+    })
+    .catch(err=>{
+        for (let i = 0; i < err.response.data.errors.length; i++) {
+                const element = err.response.data.errors[i];
+                toastr.error(element)
+        }
+    })
+
+})
+
+$('#tabel-surveyor').DataTable({
+    info: false,
+    ordering: false,
+    paging: false,
+    order: [[3, 'desc']]
+});
+
+
+$('#tabel-pengguna').DataTable({
+    info: false,
+    ordering: false,
+    paging: false,
+    order: [[3, 'desc']]
+});
+
+
 
 
 

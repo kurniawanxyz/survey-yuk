@@ -48,21 +48,27 @@ Route::middleware(['auth','role:2'])->group(function () {
     Route::get('/data-detail-group/{id}',[GroupController::class,'show']);
     Route::get("/data-groupSurvei",[GroupController::class,'showGroupSurvei']);
     Route::get("/data-user",[PenggunaController::class,'getDataUser']);
+    Route::get("/data-surveyor",[PenggunaController::class,"getdataSurveyor"]);
+Route::get("/profile-surveyor",fn()=> view('admin.profile'));
 
     // proses create
     Route::post('/create-survei',[SurveiController::class,'create'])->name('create.survei');
     Route::post('/create-pertanyaan',[PertanyaanController::class,'create'])->name('create.pertanyaan');
     Route::post('/create-group',[GroupController::class,'create'])->name("create.group");
     Route::post('/tambah-user', [PenggunaController::class,'createUser'])->name("create.user");
+    Route::post('/tambah-surveyor', [PenggunaController::class,'createSurveyor'])->name("create.surveyor");
 
     // proses edit
     Route::put('/update-survei/{id}',[SurveiController::class,'edit']);
     Route::put('/update-pertanyaan/{id}',[PertanyaanController::class,'edit']);
     Route::put('/update-group/{id}',[GroupController::class,'edit']);
+    Route::put("/update-permission",[PenggunaController::class,'changePermission']);
+    Route::put("/update-profile",[PenggunaController::class,'updateProfile']);
 
     // proses delete
     Route::delete('/delete-survei/{id}',[SurveiController::class,'delete']);
     Route::delete('/delete-pertanyaan/{id}',[PertanyaanController::class,'delete']);
+    Route::delete("/delete-surveyor/{id}",[PenggunaController::class,'deleteSurveyor']);
 
 });
 

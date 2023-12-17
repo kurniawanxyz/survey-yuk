@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("judul");
             $table->text("deskripsi");
-            $table->foreignId("kreator_id")->references('id')->on('users');
+            $table->foreignId("kreator_id")->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->boolean("status_pertanyaan")->default(false);
             $table->enum("visibility",["public","private"]);
             $table->timestamps();
