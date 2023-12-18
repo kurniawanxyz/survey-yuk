@@ -16,10 +16,15 @@ use Illuminate\Support\Str;
 class AuthController extends Controller
 {
     public function login(Request $request)
-{
+    {
 
 
     $userTes = User::where('email',$request->email)->first();
+
+    if($userTes == null){
+        toastr()->error("Akun tidak ditemukan");
+        return redirect()->back();
+    }
 
     if($userTes->persetujuan_surveyor == "menunggu"){
         toastr()->error("Admin belum mengsetujui kamu menjadi surveyor");
@@ -55,10 +60,10 @@ class AuthController extends Controller
 
     if ($user->role_id == 1) {
         toastr()->success("Berhasil login");
-        return redirect()->intended(route('user.dashboard'));
+        return redirect()->route('user.dashboard');
     } else {
         toastr()->success("Berhasil login");
-        return redirect()->intended(route('admin.dashboard'));
+        return redirect()->route('admin.dashboard');
     }
 }
 

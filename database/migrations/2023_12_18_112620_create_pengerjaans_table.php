@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('group_id')->nullable()->constrained()->onDelete('cascade')->onDelete('cascade');
+            $table->foreignId("survei_id")->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('nilai');
             $table->timestamps();
         });

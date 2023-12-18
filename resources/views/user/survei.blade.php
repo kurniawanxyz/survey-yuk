@@ -14,7 +14,11 @@
                       <p class="mb-9" id="deskripsi">
 
                       </p>
-                      <button class="btn btn-secondary">Kerjakan</button>
+                      <span>Dibuat oleh<p id="kreatorSurvei"></p></span>
+                      <form id="formKerjakan" method="get">
+                          @csrf
+                          <button class="btn-kerjakan btn btn-secondary">Kerjakan</button>
+                      </form>
                     </div>
                   </div>
                 </div>
@@ -84,11 +88,15 @@
                 <p class="deskripsi-{{$survei->id}} note-inner-content text-truncate" data-notecontent="Blandit tempus porttitor aasfs. Integer posuere erat a ante venenatis.">{{ $survei->deskripsi }}</p>
                 <span onclick="handleTruncate('deskripsi-{{$survei->id}}','btn-handle-truncate-{{$survei->id}}')" style="cursor:pointer" class="btn-handle-truncate-{{$survei->id}} mb-1 badge font-medium bg-light-primary text-primary">Lihat lebih banyak</span>
               </div>
-                <button onclick="handleDetailSurvei('{{$survei->judul}}','{{$survei->deskripsi}}','{{$survei->id}}')" data-bs-toggle="modal" data-bs-target="#detail-survei" class="btn btn-primary mt-2">Detail</button>
+                <button onclick="handleDetailSurvei('{{$survei->judul}}','{{$survei->deskripsi}}','{{$survei->id}}','{{$survei->kreator->nama}}')" data-bs-toggle="modal" data-bs-target="#detail-survei" class="btn btn-primary mt-2">Detail</button>
             </div>
           </div>
         @empty
-
+          <div class="row">
+            <div class="col-12">
+                <span>Belum ada data Survei</span>
+            </div>
+          </div>
         @endforelse
       </div>
 @endsection
@@ -110,12 +118,24 @@ function handleTruncate(className,button){
   });
 }
 
-        function handleDetailSurvei(judul,deskripsi,id)
+        function handleDetailSurvei(judul,deskripsi,id,kreator)
         {
             $("#judul").text(judul);
             $("#deskripsi").text(deskripsi);
-
+            $("#kreatorSurvei").text(kreator);
+            $(".btn-kerjakan").attr("data-survei_id",id);
         }
+
+        // $(".btn-kerjakan").click(function(){
+        //
+
+        // })
+
+        $("#formKerjakan").submit(function(e){
+            e.preventDefault()
+            const survei_id = $(".btn-kerjakan").attr("data-survei_id");
+            location.href = "/pengerjaan/"+survei_id
+        })
 
       </script>
 @endSection

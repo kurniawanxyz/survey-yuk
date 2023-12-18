@@ -31,4 +31,9 @@ class Survei extends Model
         return $this->belongsToMany(Group::class,"survei_groups");
     }
 
+    public function pengerjaan()
+    {
+        return $this->hasMany(Pengerjaan::class);
+    }
+
 }

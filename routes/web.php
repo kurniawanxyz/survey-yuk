@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\PengerjaanController;
 use App\Http\Controllers\PertanyaanController;
 use App\Http\Controllers\SurveiController;
 use App\Http\Controllers\PenggunaController;
+use App\Models\Pengerjaan;
 use App\Models\Survei;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -90,5 +92,8 @@ Route::middleware(['auth',"role:1"])->group(function(){
     Route::get('/dashboard-user',function(){ return view('user.dashboard'); })->name('user.dashboard');
     Route::get('/user/survei',[SurveiController::class,'index'])->name('user.survei');
     Route::get("/profile-user",fn()=> view('user.profile'))->name('user.profile');
+    Route::get("/pengerjaan/{survei_id}",[PengerjaanController::class,'index']);
 
+
+    Route::post("/selesai-mengerjakan/{survei_id}",[PengerjaanController::class,'selesaiPengerjaan'])->name("selesaiPengerjaan");
 });

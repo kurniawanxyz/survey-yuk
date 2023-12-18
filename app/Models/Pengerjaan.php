@@ -22,4 +22,9 @@ class Pengerjaan extends Model
     {
         return $this->belongsTo(Group::class);
     }
+
+    public function survei()
+    {
+        return $this->belongsTo(Survei::class);
+    }
 }
