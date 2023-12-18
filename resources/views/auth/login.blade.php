@@ -54,6 +54,7 @@
                     <button type="submit" class="btn btn-primary w-100 py-8 mb-4 rounded-2">Sign In</button>
                     <span class="text-center mx-auto d-block">Belum punya akun?  <a href="{{route('page.register')}}">register</a></span>
                   </form>
+                  <a href="{{ route('show-form-forgot-password') }}">Lupa Password</a>
                 </div>
               </div>
             </div>

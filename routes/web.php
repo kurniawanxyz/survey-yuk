@@ -24,6 +24,10 @@ Route::middleware(['guest'])->group(function(){
     Route::get('/',function(){ return redirect()->route('page.login'); })->name('page.landing');
     Route::get('/login', function () { return view('auth.login'); })->name("page.login");
     Route::get('/register', function () { return view('auth.register'); })->name("page.register");
+    Route::get('/forgot-password', function (){return view('auth.forgot-password');})->name("show-form-forgot-password");
+    Route::post('/forgot-password', [AuthController::class, 'forgotPasswordMail'])->name('forgot-password');
+    Route::get('/forgot-password/{token}/{email}', [AuthController::class, 'forgotPasswordResetView'])->name('forgot-password-mail');
+    Route::post('/forgot-password-reset', [AuthController::class, 'forgotPasswordReset'])->name('forgot-password-reset');
 
     Route::post('/login-proses',[AuthController::class,'login'])->name('user.login');
     Route::post('/register-proses',[AuthController::class,'register'])->name('user.register');
