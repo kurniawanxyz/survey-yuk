@@ -14,16 +14,17 @@ use Illuminate\Support\Facades\Validator;
 class PenggunaController extends Controller
 {
     //
-    protected function createUser(Request $request){
+    protected function createUser(Request $request)
+    {
 
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             // "fotoProfile" => "required|image|max:2048",
             "nama" => "required|string|max:50",
             "email" => "email|required|string|max:50|unique:users,email",
             "password" => "required|string"
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             $errors = $validator->errors()->all();
             return response()->json([
                 'message' => 'Validasi gagal',
@@ -38,20 +39,20 @@ class PenggunaController extends Controller
             "role_id" => 1,
         ]);
 
-        return response()->json(["message"=>"Berhasil membuat user"]);
+        return response()->json(["message" => "Berhasil membuat user"]);
     }
 
     protected function createSurveyor(Request $request)
     {
 
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             // "fotoProfile" => "required|image|max:2048",
             "nama" => "required|string|max:50",
             "email" => "email|required|string|max:50|unique:users,email",
             "password" => "required|string"
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             $errors = $validator->errors()->all();
             return response()->json([
                 'message' => 'Validasi gagal',
@@ -67,42 +68,43 @@ class PenggunaController extends Controller
             "role_id" => 2,
         ]);
 
-        return response()->json(["message"=>"Berhasil membuat surveyor"]);
+        return response()->json(["message" => "Berhasil membuat surveyor"]);
     }
 
-    protected function changePermission(Request $request){
-       if($request->status) {
+    protected function changePermission(Request $request)
+    {
+        if ($request->status) {
             User::find($request->id)->update([
                 "permission" => 0,
             ]);
-        }else{
-           User::find($request->id)->update([
-               "permission" => 1,
-           ]);
-       }
+        } else {
+            User::find($request->id)->update([
+                "permission" => 1,
+            ]);
+        }
 
-       return response()->json(["message"=>"berhasil mengubah permission user"]);
+        return response()->json(["message" => "berhasil mengubah permission user"]);
     }
 
     protected function getDataUser()
     {
-        $user = User::where("role_id",1)->get();
+        $user = User::where("role_id", 1)->get();
         return response()->json($user);
     }
 
     protected function getDataSurveyor()
     {
-        $user = User::where("role_id",2)->get();
+        $user = User::where("role_id", 2)->get();
         return response()->json($user);
     }
 
     protected function deleteSurveyor($id)
     {
         try {
-            User::where("role_id",2)->where('id',$id)->first()->delete();
-            return response()->json(["message"=>"Berhasil menghapus surveyor"]);
+            User::where("role_id", 2)->where('id', $id)->first()->delete();
+            return response()->json(["message" => "Berhasil menghapus surveyor"]);
         } catch (Exception $th) {
-            return response()->json(["message"=>$th]);
+            return response()->json(["message" => $th]);
         }
     }
 
@@ -118,12 +120,12 @@ class PenggunaController extends Controller
         $user->nama = $request->nama;
         $user->email = $request->email;
 
-        if($request->fotoProfile){
-            if($user->fotoProfil === null){
+        if ($request->fotoProfile) {
+            if ($user->fotoProfil === null) {
                 $image = "profile/" . time() . '.' . $request->fotoProfile->extension();
                 $request->fotoProfile->storeAs($image);
                 $user->fotoProfil = $image;
-            }else{
+            } else {
                 Storage::delete($user->fotoProfil);
                 $image = "profile/" . time() . '.' . $request->fotoProfile->extension();
                 $request->fotoProfile->storeAs($image);
@@ -146,7 +148,7 @@ class PenggunaController extends Controller
         ]);
 
 
-        if(!Hash::check($request->passwordLama,Auth::user()->password)){
+        if (!Hash::check($request->passwordLama, Auth::user()->password)) {
             toastr()->error("Password lama tidak sama dengan password terdahulu");
             return back();
         }
@@ -159,6 +161,43 @@ class PenggunaController extends Controller
         return redirect()->back();
     }
 
-    
 
+    public function searchPengguna(Request $request)
+    {
+        try {
+            if ($request->filled('value')) {
+                $pengguna = User::where('role_id', 1)
+                    ->where(function ($query) use ($request) {
+                        $query->where('nama', 'LIKE', '%' . $request->value . '%')
+                            ->orWhere('email', 'LIKE', '%' . $request->value . '%');
+                    })
+                    ->get();
+                if ($pengguna->isEmpty()) {
+                    return response()->json(['data' => [['message' => "Data tidak ditemukan", 'status' => 404,]], 'success' => true]);
+                }
+                return response()->json(['data' => $pengguna, 'success' => true]);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['data' => [['message' => "500 Internal Server Error"]], 'success' => false, 'error' => $e]);
+        }
+    }
+    public function searchSurveyor(Request $request)
+    {
+        try {
+            if ($request->filled('value')) {
+                $pengguna = User::where('role_id', 2)
+                    ->where(function ($query) use ($request) {
+                        $query->where('nama', 'LIKE', '%' . $request->value . '%')
+                            ->orWhere('email', 'LIKE', '%' . $request->value . '%');
+                    })
+                    ->get();
+                if ($pengguna->isEmpty()) {
+                    return response()->json(['data' => [['message' => "Data tidak ditemukan", 'status' => 404,]], 'success' => true]);
+                }
+                return response()->json(['data' => $pengguna, 'success' => true]);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['data' => [['message' => "500 Internal Server Error"]], 'success' => false, 'error' => $e]);
+        }
+    }
 }
