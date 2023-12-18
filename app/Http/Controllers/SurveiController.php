@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\SurveiGroup;
 use App\Models\Group;
+use App\Models\User;
 
 class SurveiController extends Controller
 {
@@ -104,9 +105,6 @@ class SurveiController extends Controller
 
         $survei->save();
 
-
-
-
         return response()->json(["message"=>"Congratulations on successfully edit a survey!"]);
 
     }
@@ -116,4 +114,11 @@ class SurveiController extends Controller
         $survei = Survei::find($id)->delete();
         return response()->json(["message"=>"Congratulations on successfully deleted a survey!"]);
     }
+
+    protected function index()
+    {
+        $surveis = Survei::where('visibility','public')->get();
+        return view('user.survei',compact('surveis'));
+    }
+
 }

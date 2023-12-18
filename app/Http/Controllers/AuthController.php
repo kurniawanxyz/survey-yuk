@@ -17,10 +17,20 @@ class AuthController extends Controller
 {
     public function login(Request $request)
 {
+
+
+    $userTes = User::where('email',$request->email)->first();
+
+    if($userTes->persetujuan_surveyor == "menunggu"){
+        toastr()->error("Admin belum mengsetujui kamu menjadi surveyor");
+        return redirect()->back();
+    }
+
     $request->validate([
         'email' => 'required|email',
         'password' => 'required',
     ]);
+
 
     // dd($request);
 
@@ -32,6 +42,11 @@ class AuthController extends Controller
     }
 
     $user = User::where('email',$request->email)->first();
+
+    if($user->persetujuan_surveyor == "menunggu"){
+        toastr()->error("Admin belum mengsetujui kamu menjadi surveyor");
+        return redirect()->back();
+    }
 
         if(Hash::check($user->password,Hash::make($request->password))){
             toastr()->error("Password Salah");
@@ -56,7 +71,7 @@ class AuthController extends Controller
         'nama' => 'required|max:50',
         'email' => 'required|email|unique:users,email',
         'password' => 'required|min:8',
-        'role_id' => 'required|numeric|max:1'
+        'role_id' => 'required|numeric|max:2'
     ]);
 
     $user = new User;

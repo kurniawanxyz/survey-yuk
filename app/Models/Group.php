@@ -29,4 +29,9 @@ class Group extends Model
         return $this->belongsToMany(Survei::class,"user_groups");
     }
 
+    public function pengerjaan()
+    {
+        return $this->hasMany(Pengerjaan::class);
+    }
+
 }
