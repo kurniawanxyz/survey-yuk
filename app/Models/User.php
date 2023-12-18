@@ -54,12 +54,17 @@ class User extends Authenticatable
         return $this->belongsToMany(Group::class, 'user_groups');
     }
 
+    public function groupThatIMake():HasMany
+    {
+        return $this->hasMany(Group::class,'kreator_id');
+    }
+
     public function surveis():HasMany
     {
         return $this->hasMany(Survei::class,'kreator_id');
     }
 
-    
+
 
 
 }

@@ -19,9 +19,9 @@
         </div>
       </div>
     </div>
-  </div>
+</div>
 <div class="card overflow-hidden">
-    <div class="card-body p-0">
+    <div class="card-body p-0 mt-5">
       <img src="../../dist/images/backgrounds/profilebg.jpg" alt="" class="img-fluid">
       <div class="row align-items-center">
         <div class="col-lg-4 order-lg-1 order-2">
@@ -38,7 +38,7 @@
             </div>
             <div class="text-center">
               <i class="ti ti-user-check fs-6 d-block mb-2"></i>
-              <h4 class="mb-0 fw-semibold lh-1">{{ Auth::user()->groups->count() }}</h4>
+              <h4 class="mb-0 fw-semibold lh-1">{{ Auth::user()->groupThatIMake->count()}}</h4>
               <p class="mb-0 fs-4">Group</p>
             </div>
           </div>
