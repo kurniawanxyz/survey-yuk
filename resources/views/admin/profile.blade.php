@@ -48,7 +48,7 @@
             <div class="d-flex align-items-center justify-content-center mb-2">
               <div class="linear-gradient d-flex align-items-center justify-content-center rounded-circle" style="width: 110px; height: 110px;";>
                 <div class="border border-4 border-white d-flex align-items-center justify-content-center rounded-circle overflow-hidden" style="width: 100px; height: 100px;";>
-                  <img src="../../dist/images/profile/user-1.jpg" alt="" class="w-100 h-100">
+                  <img style="object-fit: cover" src="{{ Auth::user()->fotoProfil ? asset('storage/' . Auth::user()->fotoProfil) : asset('default.jpg') }}"  alt="" class="w-100 h-100">
                 </div>
               </div>
             </div>
@@ -71,7 +71,7 @@
         <li class="nav-item" role="presentation">
           <button class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6" id="pills-followers-tab" data-bs-toggle="pill" data-bs-target="#pills-followers" type="button" role="tab" aria-controls="pills-followers" aria-selected="false">
             <i class="ti ti-heart me-2 fs-6"></i>
-            <span class="d-none d-md-block">Followers</span>
+            <span class="d-none d-md-block">Ganti Password</span>
           </button>
         </li>
         <li class="nav-item" role="presentation">
@@ -94,23 +94,25 @@
       <div class="row">
         <div class="card-body p-3">
             <h5 class="mb-3">Edit Profile</h5>
-            <form >
+            <form action="{{ route('edit.profile') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method("PUT")
               <div class="row">
                   <label for="foto-profile">Foto-profile</label>
                 <div class="col-md-4">
                     <div class="form-control mb-3">
-                    <input type="file" class="form-control" id="foto-profile" placeholder="Enter Name here">
+                    <input type="file" name="fotoProfile" class="form-control" id="foto-profile" placeholder="Enter Name here">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="tb-fname" value="{{Auth::user()->nama}}" placeholder="Enter Name here">
+                    <input type="text" class="form-control" name="nama" id="tb-fname" value="{{Auth::user()->nama}}" placeholder="Enter Name here">
                     <label for="tb-fname">Name</label>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="tb-email" value="{{Auth::user()->email}}" placeholder="name@example.com">
+                    <input type="email" name="email" class="form-control" id="tb-email" value="{{Auth::user()->email}}" placeholder="name@example.com">
                     <label for="tb-email">Email address</label>
                   </div>
                 </div>
@@ -133,255 +135,45 @@
       </div>
     </div>
     <div class="tab-pane fade" id="pills-followers" role="tabpanel" aria-labelledby="pills-followers-tab" tabindex="0">
-      <div class="d-sm-flex align-items-center justify-content-between mt-3 mb-4">
-        <h3 class="mb-3 mb-sm-0 fw-semibold d-flex align-items-center">Followers <span class="badge text-bg-secondary fs-2 rounded-4 py-1 px-2 ms-2">20</span></h3>
-        <form class="position-relative">
-          <input type="text" class="form-control search-chat py-2 ps-5" id="text-srh" placeholder="Search Followers">
-          <i class="ti ti-search position-absolute top-50 start-0 translate-middle-y text-dark ms-3"></i>
-        </form>
-      </div>
-      <div class="row">
-        <div class=" col-md-6 col-xl-4">
-          <div class="card">
-            <div class="card-body p-4 d-flex align-items-center gap-3">
-              <img src="../../dist/images/profile/user-1.jpg" alt="" class="rounded-circle" width="40" height="40">
-              <div>
-                <h5 class="fw-semibold mb-0">Betty Adams</h5>
-                <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Sint Maarten</span>
+        <div class="card-body">
+            <h5 class="mb-3">Ganti Password</h5>
+            <form action="{{ route('edit.password') }}" method="">
+                @csrf
+                @method("PUT")
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-floating mb-3">
+                    <input type="password" name="passwordLama" class="form-control" id="tb-email" placeholder="name@example.com">
+                    <label for="tb-email">Password Lama</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input type="password" name="password" class="form-control" id="tb-pwd" placeholder="Password">
+                    <label for="tb-pwd">Password</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input type="password" name="konfirmPassword" class="form-control" id="tb-cpwd" placeholder="Password">
+                    <label for="tb-cpwd">Konfirmasi Password</label>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="d-md-flex align-items-center mt-3">
+                    <div class="ms-auto mt-3 mt-md-0">
+                      <button type="submit" class="btn btn-info font-medium rounded-pill px-4">
+                        <div class="d-flex align-items-center">
+                          <i class="ti ti-send me-2 fs-4"></i>
+                          Submit
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <button class="btn btn-outline-primary py-1 px-2 ms-auto">Follow</button>
-            </div>
+            </form>
           </div>
-        </div>
-        <div class=" col-md-6 col-xl-4">
-          <div class="card">
-            <div class="card-body p-4 d-flex align-items-center gap-3">
-              <img src="../../dist/images/profile/user-2.jpg" alt="" class="rounded-circle" width="40" height="40">
-              <div>
-                <h5 class="fw-semibold mb-0">Virginia Wong</h5>
-                <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Tunisia</span>
-              </div>
-              <button class="btn btn-outline-primary py-1 px-2 ms-auto">Follow</button>
-            </div>
-          </div>
-        </div>
-        <div class=" col-md-6 col-xl-4">
-          <div class="card">
-            <div class="card-body p-4 d-flex align-items-center gap-3">
-              <img src="../../dist/images/profile/user-3.jpg" alt="" class="rounded-circle" width="40" height="40">
-              <div>
-                <h5 class="fw-semibold mb-0">Birdie Burgess</h5>
-                <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Algeria</span>
-              </div>
-              <button class="btn btn-primary py-1 px-2 ms-auto">Followed</button>
-            </div>
-          </div>
-        </div>
-        <div class=" col-md-6 col-xl-4">
-          <div class="card">
-            <div class="card-body p-4 d-flex align-items-center gap-3">
-              <img src="../../dist/images/profile/user-4.jpg" alt="" class="rounded-circle" width="40" height="40">
-              <div>
-                <h5 class="fw-semibold mb-0">Steven Lindsey</h5>
-                <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Malaysia</span>
-              </div>
-              <button class="btn btn-primary py-1 px-2 ms-auto">Followed</button>
-            </div>
-          </div>
-        </div>
-        <div class=" col-md-6 col-xl-4">
-          <div class="card">
-            <div class="card-body p-4 d-flex align-items-center gap-3">
-              <img src="../../dist/images/profile/user-5.jpg" alt="" class="rounded-circle" width="40" height="40">
-              <div>
-                <h5 class="fw-semibold mb-0">Hannah Rhodes</h5>
-                <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Grenada</span>
-              </div>
-              <button class="btn btn-primary py-1 px-2 ms-auto">Followed</button>
-            </div>
-          </div>
-        </div>
-        <div class=" col-md-6 col-xl-4">
-          <div class="card">
-            <div class="card-body p-4 d-flex align-items-center gap-3">
-              <img src="../../dist/images/profile/user-6.jpg" alt="" class="rounded-circle" width="40" height="40">
-              <div>
-                <h5 class="fw-semibold mb-0">Effie Gross</h5>
-                <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Azerbaijan</span>
-              </div>
-              <button class="btn btn-outline-primary py-1 px-2 ms-auto">Follow</button>
-            </div>
-          </div>
-        </div>
-        <div class=" col-md-6 col-xl-4">
-          <div class="card">
-            <div class="card-body p-4 d-flex align-items-center gap-3">
-              <img src="../../dist/images/profile/user-7.jpg" alt="" class="rounded-circle" width="40" height="40">
-              <div>
-                <h5 class="fw-semibold mb-0">Mark Barton</h5>
-                <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>French Southern Territories</span>
-              </div>
-              <button class="btn btn-outline-primary py-1 px-2 ms-auto">Follow</button>
-            </div>
-          </div>
-        </div>
-        <div class=" col-md-6 col-xl-4">
-          <div class="card">
-            <div class="card-body p-4 d-flex align-items-center gap-3">
-              <img src="../../dist/images/profile/user-8.jpg" alt="" class="rounded-circle" width="40" height="40">
-              <div>
-                <h5 class="fw-semibold mb-0">Carolyn Knight</h5>
-                <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Nauru</span>
-              </div>
-              <button class="btn btn-primary py-1 px-2 ms-auto">Followed</button>
-            </div>
-          </div>
-        </div>
-        <div class=" col-md-6 col-xl-4">
-          <div class="card">
-            <div class="card-body p-4 d-flex align-items-center gap-3">
-              <img src="../../dist/images/profile/user-9.jpg" alt="" class="rounded-circle" width="40" height="40">
-              <div>
-                <h5 class="fw-semibold mb-0">Elizabeth Malone</h5>
-                <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Djibouti</span>
-              </div>
-              <button class="btn btn-primary py-1 px-2 ms-auto">Followed</button>
-            </div>
-          </div>
-        </div>
-        <div class=" col-md-6 col-xl-4">
-          <div class="card">
-            <div class="card-body p-4 d-flex align-items-center gap-3">
-              <img src="../../dist/images/profile/user-10.jpg" alt="" class="rounded-circle" width="40" height="40">
-              <div>
-                <h5 class="fw-semibold mb-0">Jon Cohen</h5>
-                <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>United States</span>
-              </div>
-              <button class="btn btn-primary py-1 px-2 ms-auto">Followed</button>
-            </div>
-          </div>
-        </div>
-        <div class=" col-md-6 col-xl-4">
-          <div class="card">
-            <div class="card-body p-4 d-flex align-items-center gap-3">
-              <img src="../../dist/images/profile/user-1.jpg" alt="" class="rounded-circle" width="40" height="40">
-              <div>
-                <h5 class="fw-semibold mb-0">Mary Hernandez</h5>
-                <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Equatorial Guinea</span>
-              </div>
-              <button class="btn btn-outline-primary py-1 px-2 ms-auto">Follow</button>
-            </div>
-          </div>
-        </div>
-        <div class=" col-md-6 col-xl-4">
-          <div class="card">
-            <div class="card-body p-4 d-flex align-items-center gap-3">
-              <img src="../../dist/images/profile/user-2.jpg" alt="" class="rounded-circle" width="40" height="40">
-              <div>
-                <h5 class="fw-semibold mb-0">Willie Peterson</h5>
-                <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Solomon Islands</span>
-              </div>
-              <button class="btn btn-primary py-1 px-2 ms-auto">Followed</button>
-            </div>
-          </div>
-        </div>
-        <div class=" col-md-6 col-xl-4">
-          <div class="card">
-            <div class="card-body p-4 d-flex align-items-center gap-3">
-              <img src="../../dist/images/profile/user-3.jpg" alt="" class="rounded-circle" width="40" height="40">
-              <div>
-                <h5 class="fw-semibold mb-0">Harvey Baldwin</h5>
-                <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Uruguay</span>
-              </div>
-              <button class="btn btn-primary py-1 px-2 ms-auto">Followed</button>
-            </div>
-          </div>
-        </div>
-        <div class=" col-md-6 col-xl-4">
-          <div class="card">
-            <div class="card-body p-4 d-flex align-items-center gap-3">
-              <img src="../../dist/images/profile/user-4.jpg" alt="" class="rounded-circle" width="40" height="40">
-              <div>
-                <h5 class="fw-semibold mb-0">Alice George</h5>
-                <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Madagascar</span>
-              </div>
-              <button class="btn btn-outline-primary py-1 px-2 ms-auto">Follow</button>
-            </div>
-          </div>
-        </div>
-        <div class=" col-md-6 col-xl-4">
-          <div class="card">
-            <div class="card-body p-4 d-flex align-items-center gap-3">
-              <img src="../../dist/images/profile/user-5.jpg" alt="" class="rounded-circle" width="40" height="40">
-              <div>
-                <h5 class="fw-semibold mb-0">Beulah Simpson</h5>
-                <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Bahrain</span>
-              </div>
-              <button class="btn btn-primary py-1 px-2 ms-auto">Followed</button>
-            </div>
-          </div>
-        </div>
-        <div class=" col-md-6 col-xl-4">
-          <div class="card">
-            <div class="card-body p-4 d-flex align-items-center gap-3">
-              <img src="../../dist/images/profile/user-6.jpg" alt="" class="rounded-circle" width="40" height="40">
-              <div>
-                <h5 class="fw-semibold mb-0">Francis Barber</h5>
-                <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Colombia</span>
-              </div>
-              <button class="btn btn-outline-primary py-1 px-2 ms-auto">Follow</button>
-            </div>
-          </div>
-        </div>
-        <div class=" col-md-6 col-xl-4">
-          <div class="card">
-            <div class="card-body p-4 d-flex align-items-center gap-3">
-              <img src="../../dist/images/profile/user-7.jpg" alt="" class="rounded-circle" width="40" height="40">
-              <div>
-                <h5 class="fw-semibold mb-0">Christian Morales</h5>
-                <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Maldives</span>
-              </div>
-              <button class="btn btn-primary py-1 px-2 ms-auto">Followed</button>
-            </div>
-          </div>
-        </div>
-        <div class=" col-md-6 col-xl-4">
-          <div class="card">
-            <div class="card-body p-4 d-flex align-items-center gap-3">
-              <img src="../../dist/images/profile/user-8.jpg" alt="" class="rounded-circle" width="40" height="40">
-              <div>
-                <h5 class="fw-semibold mb-0">Laura Nelson</h5>
-                <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>St. Helena</span>
-              </div>
-              <button class="btn btn-primary py-1 px-2 ms-auto">Followed</button>
-            </div>
-          </div>
-        </div>
-        <div class=" col-md-6 col-xl-4">
-          <div class="card">
-            <div class="card-body p-4 d-flex align-items-center gap-3">
-              <img src="../../dist/images/profile/user-9.jpg" alt="" class="rounded-circle" width="40" height="40">
-              <div>
-                <h5 class="fw-semibold mb-0">Blanche Strickland</h5>
-                <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>South Africa</span>
-              </div>
-              <button class="btn btn-primary py-1 px-2 ms-auto">Followed</button>
-            </div>
-          </div>
-        </div>
-        <div class=" col-md-6 col-xl-4">
-          <div class="card">
-            <div class="card-body p-4 d-flex align-items-center gap-3">
-              <img src="../../dist/images/profile/user-10.jpg" alt="" class="rounded-circle" width="40" height="40">
-              <div>
-                <h5 class="fw-semibold mb-0">Adam Washington</h5>
-                <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Suriname</span>
-              </div>
-              <button class="btn btn-primary py-1 px-2 ms-auto">Followed</button>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
     <div class="tab-pane fade" id="pills-friends" role="tabpanel" aria-labelledby="pills-friends-tab" tabindex="0">
       <div class="d-sm-flex align-items-center justify-content-between mt-3 mb-4">

@@ -49,7 +49,7 @@ Route::middleware(['auth','role:2'])->group(function () {
     Route::get("/data-groupSurvei",[GroupController::class,'showGroupSurvei']);
     Route::get("/data-user",[PenggunaController::class,'getDataUser']);
     Route::get("/data-surveyor",[PenggunaController::class,"getdataSurveyor"]);
-Route::get("/profile-surveyor",fn()=> view('admin.profile'));
+    Route::get("/profile-surveyor",fn()=> view('admin.profile'))->name('admin.profile');
 
     // proses create
     Route::post('/create-survei',[SurveiController::class,'create'])->name('create.survei');
@@ -63,7 +63,8 @@ Route::get("/profile-surveyor",fn()=> view('admin.profile'));
     Route::put('/update-pertanyaan/{id}',[PertanyaanController::class,'edit']);
     Route::put('/update-group/{id}',[GroupController::class,'edit']);
     Route::put("/update-permission",[PenggunaController::class,'changePermission']);
-    Route::put("/update-profile",[PenggunaController::class,'updateProfile']);
+    Route::put("/update-profile",[PenggunaController::class,'updateProfile'])->name("edit.profile");
+    Route::put('/update-password',[PenggunaController::class,'changePassword'])->name("edit.password");
 
     // proses delete
     Route::delete('/delete-survei/{id}',[SurveiController::class,'delete']);

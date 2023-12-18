@@ -6,7 +6,9 @@ use App\Models\User;
 use Exception;
 use Flasher\Laravel\Http\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class PenggunaController extends Controller
@@ -102,5 +104,58 @@ class PenggunaController extends Controller
         } catch (Exception $th) {
             return response()->json(["message"=>$th]);
         }
+    }
+
+    protected function updateProfile(Request $request)
+    {
+        $request->validate([
+            "nama" => "string|max:100",
+            "email" => "string|email|max:100",
+            "fotoProfile" => "image|max:2048"
+        ]);
+
+        $user = User::find(Auth::user()->id);
+        $user->nama = $request->nama;
+        $user->email = $request->email;
+
+        if($request->fotoProfile){
+            if($user->fotoProfil === null){
+                $image = "profile/" . time() . '.' . $request->fotoProfile->extension();
+                $request->fotoProfile->storeAs($image);
+                $user->fotoProfil = $image;
+            }else{
+                Storage::delete($user->fotoProfil);
+                $image = "profile/" . time() . '.' . $request->fotoProfile->extension();
+                $request->fotoProfile->storeAs($image);
+                $user->fotoProfil = $image;
+            }
+        }
+
+        $user->save();
+        toastr()->success("Berhasil Mengupdate foto profile");
+        return redirect()->back();
+    }
+
+    protected function changePassword(Request $request)
+    {
+        $request->validate([
+            "password" => "required|min:8",
+            "passwordLama" => "required|min:8",
+            "konfirmPassword" => "required|same:passwordLama|min:8",
+        ]);
+
+        $passwordLama = (Auth::user()->password == $request->passwordLama);
+
+        if(!$passwordLama){
+            toastr()->error("Password lama tidak sama dengan password terdahulu");
+            return back();
+        }
+
+        User::findOrFail(Auth::user()->id)->update([
+            "password" => Hash::make($request->password),
+        ]);
+
+        toastr()->success("Berhasil mengganti password");
+        return redirect()->back();  
     }
 }
