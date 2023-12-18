@@ -158,4 +158,7 @@ class PenggunaController extends Controller
         toastr()->success("Berhasil mengganti password");
         return redirect()->back();
     }
+
+    
+
 }

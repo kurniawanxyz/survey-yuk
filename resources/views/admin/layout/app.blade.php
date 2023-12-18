@@ -195,7 +195,10 @@
                           </a>
                         </div>
                         <div class="d-grid py-4 px-7 pt-8">
-                          <a href="authentication-login.html" class="btn btn-outline-primary">Log Out</a>
+                            <form class="w-100" action="{{ route('user.logout') }}" method="post">
+                                @csrf
+                                <button type="submit" class="btn btn-outline-primary w-100">Log Out</button>
+                            </form>
                         </div>
                       </div>
                     </div>

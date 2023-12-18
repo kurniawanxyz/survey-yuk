@@ -65,4 +65,11 @@ class AuthController extends Controller
 
 }
 
+public function logout()
+{
+    Auth::logout();
+    toastr()->success("Berhasil Logout");
+    return redirect()->route('page.login');
+}
+
 }

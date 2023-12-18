@@ -27,8 +27,10 @@ Route::middleware(['guest'])->group(function(){
 
     Route::post('/login-proses',[AuthController::class,'login'])->name('user.login');
     Route::post('/register-proses',[AuthController::class,'register'])->name('user.register');
+
 });
 
+Route::post('/logout',[AuthController::class,'logout'])->name('user.logout');
 
 Route::middleware(['auth','role:2'])->group(function () {
 
