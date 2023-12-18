@@ -20,6 +20,8 @@
     <link  id="themeColors"  rel="stylesheet" href="{{ asset('dist/css/style.min.css') }}" />
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"></script>
   </head>
+
+
   <body>
     <!-- Preloader -->
     <div class="preloader">
@@ -59,11 +61,24 @@
                       <label for="email" class="form-label">Email</label>
                       <input type="email" name="email" class="form-control" id="email" aria-describedby="email">
                     </div>
-                    <div class="mb-4">
+                    <div class="mb-3">
                       <label for="password" class="form-label">Password</label>
                       <input type="password" name="password" class="form-control" id="password">
                     </div>
+                    <div class="mb-4 d-flex justify-content-evenly">
+                        <label onclick="get()" class="check-label border label-background rounded p-2 border-primary d-flex justify-content-center flex-column align-items-center" for="role">
+                            <svg class="text-primary" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M5 18.235q1.35-1.325 3.138-2.088T12 15.385q2.075 0 3.863.762T19 18.235V5H5zm7-5.158q1.258 0 2.129-.871t.871-2.13q0-1.257-.871-2.128T12 7.077q-1.258 0-2.129.871T9 10.077q0 1.258.871 2.129t2.129.87M4 20V4h16v16zm1.885-1h12.23v-.173q-1.319-1.24-2.873-1.841q-1.554-.601-3.242-.601q-1.65 0-3.213.591q-1.564.591-2.902 1.812zM12 12.077q-.817 0-1.409-.591q-.591-.592-.591-1.41q0-.816.591-1.408q.592-.591 1.409-.591q.817 0 1.409.591q.591.592.591 1.409q0 .817-.591 1.409q-.592.59-1.409.59m0-.459"/></svg>
+                            <h6 class="text-primary">Pengguna</h4>
+                            <input checked class="d-none radio-trigger" type="radio" value="1" name="role_id" id="role">
+                            </label>
+                        <label onclick="get()" class="check-label border rounded p-2 border-primary d-flex justify-content-center flex-column align-items-center" for="role2">
+                            <svg class="text-primary" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M5 18.235q1.35-1.325 3.138-2.088T12 15.385q2.075 0 3.863.762T19 18.235V5H5zm7-5.158q1.258 0 2.129-.871t.871-2.13q0-1.257-.871-2.128T12 7.077q-1.258 0-2.129.871T9 10.077q0 1.258.871 2.129t2.129.87M4 20V4h16v16zm1.885-1h12.23v-.173q-1.319-1.24-2.873-1.841q-1.554-.601-3.242-.601q-1.65 0-3.213.591q-1.564.591-2.902 1.812zM12 12.077q-.817 0-1.409-.591q-.591-.592-.591-1.41q0-.816.591-1.408q.592-.591 1.409-.591q.817 0 1.409.591q.591.592.591 1.409q0 .817-.591 1.409q-.592.59-1.409.59m0-.459"/></svg>
+                            <h6 class="text-primary">Surveyor</h6>
+                            <input class="d-none radio-trigger" type="radio" value="2" name="role_id" id="role2">
+                        </label>
+                    </div>
                     <button type="submit" class="btn btn-primary w-100 py-8 mb-4 rounded-2">Sign Up</button>
+                    <span class="text-center mx-auto d-block">Sudah punya akun?  <a href="{{route('page.login')}}">login</a></span>
                   </form>
                 </div>
               </div>
@@ -77,9 +92,21 @@
     @include('components.script')
 
     <script>
-
-
-
+        get()
+        function get(){
+            const input = $("input[name='role_id']");
+             $.each(input,(index,data)=>{
+                 if(data.checked){
+                     $(`label[for='${data.id}']`).addClass("bg-primary")
+                     $(`label[for='${data.id}'] svg`).addClass("text-white")
+                     $(`label[for='${data.id}'] h6`).addClass("text-white")
+                    }else{
+                        $(`label[for='${data.id}']`).removeClass("bg-primary")
+                        $(`label[for='${data.id}'] svg`).removeClass("text-white")
+                        $(`label[for='${data.id}'] h6`).removeClass("text-white")
+                 }
+             })
+        }
     </script>
 
   </body>

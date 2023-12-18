@@ -50,19 +50,26 @@ class AuthController extends Controller
         'nama' => 'required|max:50',
         'email' => 'required|email|unique:users,email',
         'password' => 'required|min:8',
+        'role_id' => 'required|numeric|max:1'
     ]);
 
     $user = new User;
     $user->nama = $request->nama;
     $user->email = $request->email;
-    $user->role_id = 1;
+    $user->role_id = $request->role_id;
+    if($request->role_id == 2){
+        $user->persetujuan_surveyor = "menunggu";
+    }
     $user->password = Hash::make($request->password);
     $user->save();
 
 
-    toastr()->success("Sukses Register");
+    if($request->role_id == 2){
+        toastr()->success("Sukses Register")->success("Tunggulah sampai admin mengsetujuimu menjadi surveyor");
+    }else{
+        toastr()->success("Sukses Register");
+    }
     return redirect()->intended(route('page.login'));
-
 }
 
 public function logout()

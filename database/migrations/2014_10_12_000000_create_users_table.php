@@ -20,6 +20,7 @@ return new class extends Migration
             $table->boolean("permission")->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string("fotoProfil")->nullable();
+            $table->enum("persetujuan_surveyor",['disetujui','menunggu','ditolak'])->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
