@@ -138,15 +138,15 @@ class PenggunaController extends Controller
 
     protected function changePassword(Request $request)
     {
+        // dd($request);
         $request->validate([
             "password" => "required|min:8",
             "passwordLama" => "required|min:8",
-            "konfirmPassword" => "required|same:passwordLama|min:8",
+            "konfirmPassword" => "same:password",
         ]);
 
-        $passwordLama = (Auth::user()->password == $request->passwordLama);
 
-        if(!$passwordLama){
+        if(!Hash::check($request->passwordLama,Auth::user()->password)){
             toastr()->error("Password lama tidak sama dengan password terdahulu");
             return back();
         }
@@ -156,6 +156,6 @@ class PenggunaController extends Controller
         ]);
 
         toastr()->success("Berhasil mengganti password");
-        return redirect()->back();  
+        return redirect()->back();
     }
 }

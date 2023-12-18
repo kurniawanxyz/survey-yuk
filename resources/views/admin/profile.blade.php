@@ -20,7 +20,7 @@
       </div>
     </div>
   </div>
-  <div class="card overflow-hidden">
+<div class="card overflow-hidden">
     <div class="card-body p-0">
       <img src="../../dist/images/backgrounds/profilebg.jpg" alt="" class="img-fluid">
       <div class="row align-items-center">
@@ -28,7 +28,7 @@
           <div class="d-flex gap-2 align-items-center justify-content-around m-4">
             <div class="text-center">
               <i class="ti ti-file-description fs-6 d-block mb-2"></i>
-              <h4 class="mb-0 fw-semibold lh-1">938</h4>
+              <h4 class="mb-0 fw-semibold lh-1">{{Auth::user()->}}</h4>
               <p class="mb-0 fs-4">Survei</p>
             </div>
             <div class="text-center">
@@ -72,18 +72,6 @@
           <button class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6" id="pills-followers-tab" data-bs-toggle="pill" data-bs-target="#pills-followers" type="button" role="tab" aria-controls="pills-followers" aria-selected="false">
             <i class="ti ti-heart me-2 fs-6"></i>
             <span class="d-none d-md-block">Ganti Password</span>
-          </button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6" id="pills-friends-tab" data-bs-toggle="pill" data-bs-target="#pills-friends" type="button" role="tab" aria-controls="pills-friends" aria-selected="false">
-            <i class="ti ti-user-circle me-2 fs-6"></i>
-            <span class="d-none d-md-block">Friends</span>
-          </button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6" id="pills-gallery-tab" data-bs-toggle="pill" data-bs-target="#pills-gallery" type="button" role="tab" aria-controls="pills-gallery" aria-selected="false">
-            <i class="ti ti-photo-plus me-2 fs-6"></i>
-            <span class="d-none d-md-block">Gallery</span>
           </button>
         </li>
       </ul>
