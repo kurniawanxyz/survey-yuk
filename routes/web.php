@@ -73,6 +73,9 @@ Route::middleware(['auth','role:2'])->group(function () {
     Route::delete('/delete-pertanyaan/{id}',[PertanyaanController::class,'delete']);
     Route::delete("/delete-surveyor/{id}",[PenggunaController::class,'deleteSurveyor']);
 
+    // get search data
+    Route::get('/search-pengguna', [PenggunaController::class, 'searchPengguna'])->name('search.pengguna');
+    Route::get('/search-surveyor', [PenggunaController::class, 'searchSurveyor'])->name('search.surveyor');
 });
 
 

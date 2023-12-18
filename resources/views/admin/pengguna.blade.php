@@ -163,7 +163,11 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="row">
-                                <div class="col-0 col-md-9"></div>
+                                <div class="col-0 col-md-9">
+                                    <form method="get" id="search-pengguna" role="search" class="col-5" onsubmit="event.preventDefault();">
+                                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                    </form>
+                                </div>
                                 <div class="col-12 col-md-3 d-flex justify-content-end">
                                     <button data-bs-toggle="modal" data-bs-target="#tambahUser" class="btn btn-primary">
                                         Tambah
@@ -190,7 +194,11 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="row">
-                                <div class="col-0 col-md-9"></div>
+                                <div class="col-0 col-md-9">
+                                    <form method="get" id="search-surveyor" role="search" class="col-5" onsubmit="event.preventDefault();">
+                                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                    </form>
+                                </div>
                                 <div class="col-12 col-md-3 d-flex justify-content-end">
                                     <button data-bs-toggle="modal" data-bs-target="#tambahSurveyor" class="btn btn-primary">
                                         Tambah
@@ -241,15 +249,74 @@
 <script src="{{ asset('dist/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script>
 
-
-
-
-$('#tabel-persetujuan').DataTable({
-    info: false,
-    ordering: false,
-    paging: false,
-    order: [[3, 'desc']]
+//Searching
+// Search pengguna
+$("#search-pengguna").keyup(function (e) {
+    let inputValue = $(this).find("input[type='search']").val();
+    $.ajax({
+        type: "GET",
+        url: "{{ route('search.pengguna') }}",
+        headers: {
+            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+        },
+        data: {
+            value: inputValue
+        },
+        dataType: "json",
+        success: function (response) {
+            const user = response.data;
+            $("#tabel-pengguna tbody").html("");
+            $.each(user,(index,data)=>{
+                if(data.status == 404){
+                    $("#tabel-pengguna tbody").append(`<p>${data.message}</p>`);
+                }else{
+                    let element = `
+                    <tr>
+                        <td>${index+1}</td>
+                        <td>${data.nama}</td>
+                        <td>${data.email}</td>
+                    </tr>
+                    `
+                    $("#tabel-pengguna tbody").append(element);
+                }
+            })
+        }
+    });
 });
+
+$("#search-surveyor").keyup(function (e) {
+    let inputValue = $(this).find("input[type='search']").val();
+    $.ajax({
+        type: "GET",
+        url: "{{ route('search.surveyor') }}",
+        headers: {
+            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+        },
+        data: {
+            value: inputValue
+        },
+        dataType: "json",
+        success: function (response) {
+            const user = response.data;
+            $("#tabel-surveyor tbody").html("");
+            $.each(user,(index,data)=>{
+                if(data.status == 404){
+                    $("#tabel-surveyor tbody").append(`<p>${data.message}</p>`);
+                }else{
+                    let element = `
+                    <tr>
+                        <td>${index+1}</td>
+                        <td>${data.nama}</td>
+                        <td>${data.email}</td>
+                    </tr>
+                    `
+                    $("#tabel-surveyor tbody").append(element);
+                }
+            })
+        }
+    });
+});
+
 
 getUser();
 getSurveyor();
@@ -412,27 +479,6 @@ $(".btn-tambah-user").click(function(){
     })
 
 })
-
-$('#tabel-surveyor').DataTable({
-    info: false,
-    ordering: false,
-    paging: false,
-    order: [[3, 'desc']]
-});
-
-
-$('#tabel-pengguna').DataTable({
-    info: false,
-    ordering: false,
-    paging: false,
-    order: [[3, 'desc']]
-});
-
-
-
-
-
-
 </script>
 
 @endsection
