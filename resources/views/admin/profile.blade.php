@@ -137,7 +137,7 @@
     <div class="tab-pane fade" id="pills-followers" role="tabpanel" aria-labelledby="pills-followers-tab" tabindex="0">
         <div class="card-body">
             <h5 class="mb-3">Ganti Password</h5>
-            <form action="{{ route('edit.password') }}" method="">
+            <form action="{{ route('edit.password') }}" method="POST">
                 @csrf
                 @method("PUT")
               <div class="row">
