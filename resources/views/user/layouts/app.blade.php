@@ -97,7 +97,7 @@
                 </a>
               </li> --}}
               <li class="sidebar-item">
-                <a class="sidebar-link"  aria-expanded="false">
+                <a href="{{ route('user.group') }}" class="sidebar-link"  aria-expanded="false">
                   <span>
                     <i class="ti ti-activity-heartbeat"></i>
                   </span>

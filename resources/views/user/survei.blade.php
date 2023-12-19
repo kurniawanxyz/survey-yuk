@@ -11,12 +11,50 @@
                   <div class="row justify-content-between align-items-center">
                     <div class="col-sm-12">
                       <h5 class="fw-semibold mb-9 fs-5" id="judul"></h5>
-                      <p class="mb-9" id="deskripsi">
-
+                      <p class="mb-0" id="deskripsi">
                       </p>
-                      <span>Dibuat oleh<p id="kreatorSurvei"></p></span>
+                      <span class="">Dibuat oleh<span class="badge bg-light-primary text-primary" id="kreatorSurvei"></span></span>
+                      <div class="detail-penjelasan d-none">
+                          <div class=" mt-4 d-flex justify-content-start gap-3">
+                                <div class="">
+                                    <h6 class="text-center">Nilai Maksimal</h6>
+                                    <span id="nilaiTertinggi">0</span>
+                                </div>
+                                <div class="">
+                                    <h6>Nilai rata-rata</h6>
+                                    <span id="nilaiRerata">0</span>
+                                </div>
+                                <div class="">
+                                    <h6>Nilai Minimum</h6>
+                                    <span id="nilaiTerendah">0</span>
+                                </div>
+                          </div>
+
+                          <div class="mt-4 mb-3 d-flex align-items-start gap-2 flex-column">
+                            <div class="kriteria-item d-flex flex-column">
+                                <span class="kriteria-title">Bagus</span>
+                                <span class="badge bg-success text-light">
+                                    Lebih dari 75% nilai maksimal
+                                </span>
+                            </div>
+                            <div class="kriteria-item d-flex flex-column">
+                                <span class="kriteria-title">Sedang</span>
+                                <span class="badge bg-warning text-dark">
+                                    Antara 45% - 75% nilai maksimal
+                                </span>
+                            </div>
+                            <div class="kriteria-item d-flex flex-column">
+                                <span class="kriteria-title">Buruk</span>
+                                <span class="badge bg-danger text-light">
+                                    Kurang dari 45% nilai maksimal
+                                </span>
+                            </div>
+                        </div>
+                      </div>
+
                       <form id="formKerjakan" method="get">
                           @csrf
+                          <button type="button" class="btn-detail-penjelasan btn btn-success">Lihat Detail</button>
                           <button class="btn-kerjakan btn btn-secondary">Kerjakan</button>
                       </form>
                     </div>
@@ -30,12 +68,13 @@
               </div>
         </div>
         <div class="modal-body">
-          <table class="table" id="pengerjaan">
+          <table class="table" id="tabelPengerjaan">
             <thead>
                 <tr>
                     <td>No</td>
                     <td>Tanggal Pengerjaan</td>
                     <td>Nilai</td>
+                    <td>Kriteria</td>
                 </tr>
             </thead>
             <tbody>
@@ -102,6 +141,8 @@
 @endsection
 
 @section('script')
+<script src="{{asset('utils/handleKriteria.js')}}"></script>
+<script src="{{asset('utils/handleFormatDate.js')}}"></script>
       <script>
 function handleTruncate(className,button){
     // Memeriksa elemen dengan kelas tertentu
@@ -118,12 +159,63 @@ function handleTruncate(className,button){
   });
 }
 
+        $(".btn-detail-penjelasan").click(function(){
+
+      if ($(".detail-penjelasan").hasClass('d-none')) {
+          $(this).text("Sembunyikan detail")
+      // Jika elemen memiliki kelas text-truncate, hapus kelas tersebut
+            $(".detail-penjelasan").removeClass('d-none');
+        } else {
+        //   $(this).text("Lihat lebih sedikit")
+      // Jika elemen memiliki kelas text-truncate, hapus kelas tersebut
+            $(".detail-penjelasan").addClass('d-none');
+          $(this).text("Lihat Detail");
+      }
+
+
+        })
+
         function handleDetailSurvei(judul,deskripsi,id,kreator)
         {
             $("#judul").text(judul);
             $("#deskripsi").text(deskripsi);
             $("#kreatorSurvei").text(kreator);
             $(".btn-kerjakan").attr("data-survei_id",id);
+
+            axios.get("/detail-pengerjaan-user/"+id)
+            .then(res=>{
+                const pengerjaan = res.data.pengerjaan;
+                const survei = res.data.survei;
+                const nilaiTertinggi = survei.pertanyaan.length * 4;
+                $("#nilaiTertinggi").text(nilaiTertinggi);
+
+
+                $("#tabelPengerjaan tbody").empty()
+                let no=0;
+                let nilai = 0
+                $.each(pengerjaan,(index,data)=>{
+                    nilai = nilai + data.nilai
+                    const element =`
+                    <tr>
+                        <td>${++no}</td>
+                        <td>${handleFormatDate(data.created_at)}</td>
+                        <td>${data.nilai}</td>
+                        <td>${ handleKriteria(nilaiTertinggi,data.nilai) }</td>
+                    </tr>
+                    `
+                    $("#tabelPengerjaan tbody").append(element)
+                })
+                const nilaiRerata = res.data.nilaiRerata;
+
+
+                $("#nilaiRerata").text(nilaiRerata);
+
+                $("#nilaiTerendah").text(res.data.nilaiTerendah)
+
+            })
+            .catch(err=>{
+                toastr.error(err)
+            })
         }
 
         // $(".btn-kerjakan").click(function(){

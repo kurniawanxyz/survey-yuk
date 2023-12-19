@@ -93,6 +93,10 @@ Route::middleware(['auth',"role:1"])->group(function(){
     Route::get('/user/survei',[SurveiController::class,'index'])->name('user.survei');
     Route::get("/profile-user",fn()=> view('user.profile'))->name('user.profile');
     Route::get("/pengerjaan/{survei_id}",[PengerjaanController::class,'index']);
+    Route::get("/group-user",[GroupController::class,'getUserGroup'])->name('user.group');
+
+    Route::get("/detail-pengerjaan-user/{survei_id}",[PengerjaanController::class,'detailPengerjaanUser']);
+
 
 
     Route::post("/selesai-mengerjakan/{survei_id}",[PengerjaanController::class,'selesaiPengerjaan'])->name("selesaiPengerjaan");

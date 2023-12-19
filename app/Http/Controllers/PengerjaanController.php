@@ -59,4 +59,19 @@ class PengerjaanController extends Controller
        return redirect()->route('user.survei');
 
     }
+
+    protected function detailPengerjaanUser($survei_id){
+        $pengerjaan = Auth::user()->pengerjaan->whereNull('group_id')->where('survei_id',$survei_id);
+        $survei = Survei::with('pertanyaan')->find($survei_id);
+        $avgNilai = number_format(Pengerjaan::where('survei_id',$survei_id)->avg('nilai'),1);
+        $nilaiTerendah = $survei->pertanyaan->count();
+        // dd($avgNilai);
+
+        return response()->json([
+            "pengerjaan"=>$pengerjaan,
+            "survei" => $survei,
+            "nilaiRerata" => $avgNilai,
+            "nilaiTerendah" => $nilaiTerendah
+        ]);
+    }
 }

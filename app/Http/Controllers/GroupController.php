@@ -13,6 +13,10 @@ class GroupController extends Controller
     //
 
 
+    protected function getUserGroup(){
+        $groups = Auth::user()->groups;
+        return view('user.group',compact('groups'));
+    }
 
     protected function get()
     {
