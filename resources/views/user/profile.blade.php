@@ -29,12 +29,12 @@
           <div class="d-flex gap-2 align-items-center justify-content-around m-4">
             <div class="text-center">
               <i class="ti ti-file-description fs-6 d-block mb-2"></i>
-              <h4 class="mb-0 fw-semibold lh-1">{{Auth::user()->surveis->count()}}</h4>
+              <h4 class="mb-0 fw-semibold lh-1">{{Auth::user()->pengerjaan->count()}}</h4>
               <p class="mb-0 fs-4">Survei dikerjakan</p>
             </div>
             <div class="text-center">
               <i class="ti ti-user-check fs-6 d-block mb-2"></i>
-              <h4 class="mb-0 fw-semibold lh-1">{{ Auth::user()->groupThatIMake->count()}}</h4>
+              <h4 class="mb-0 fw-semibold lh-1">{{ Auth::user()->groups->count()}}</h4>
               <p class="mb-0 fs-4">Group</p>
             </div>
           </div>
