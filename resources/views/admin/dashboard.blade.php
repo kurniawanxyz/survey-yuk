@@ -29,8 +29,8 @@
                         <div class="text-center">
                             <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-user-male.svg"
                                 width="50" height="50" class="mb-3" alt="" />
-                            <p class="fw-semibold fs-3 text-primary mb-1"> Survei </p>
-                            <h5 class="fw-semibold text-primary mb-0">96</h5>
+                            <p class="fw-semibold fs-3 text-primary mb-1">Jumlah Survei</p>
+                            <h5 class="fw-semibold text-primary mb-0">{{ Auth::user()->surveis->count() }}</h5>
                         </div>
                     </div>
                 </div>
@@ -41,8 +41,8 @@
                         <div class="text-center">
                             <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-briefcase.svg"
                                 width="50" height="50" class="mb-3" alt="" />
-                            <p class="fw-semibold fs-3 text-warning mb-1">User menyelesaikan survei</p>
-                            <h5 class="fw-semibold text-warning mb-0">3,650</h5>
+                            <p class="fw-semibold fs-3 text-warning mb-1">User menyelesaikan survei Public</p>
+                            <h5 class="fw-semibold text-warning mb-0">{{ \App\Models\Pengerjaan::where('group_id', null)->count() }}</h5>
                         </div>
                     </div>
                 </div>
@@ -53,20 +53,8 @@
                         <div class="text-center">
                             <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-mailbox.svg"
                                 width="50" height="50" class="mb-3" alt="" />
-                            <p class="fw-semibold fs-3 text-info mb-1">Pribadi Sehat</p>
-                            <h5 class="fw-semibold text-info mb-0">356</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="card border-0 zoom-in bg-light-danger shadow-none">
-                    <div class="card-body">
-                        <div class="text-center">
-                            <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-favorites.svg"
-                                width="50" height="50" class="mb-3" alt="" />
-                            <p class="fw-semibold fs-3 text-danger mb-1">Pribadi tidak sehat</p>
-                            <h5 class="fw-semibold text-danger mb-0">696</h5>
+                            <p class="fw-semibold fs-3 text-info mb-1">User menyelesaikan survei Group</p>
+                            <h5 class="fw-semibold text-info mb-0">{{ \App\Models\Pengerjaan::where('group_id', '!=', null)->count()     }}</h5>
                         </div>
                     </div>
                 </div>
