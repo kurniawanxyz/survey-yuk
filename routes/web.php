@@ -103,4 +103,5 @@ Route::middleware(['auth',"role:1"])->group(function(){
     // Edit
     Route::put("/update-profile", [PenggunaController::class, 'updateProfile'])->name("edit_user.profile");
     Route::put('/update-password', [PenggunaController::class, 'changePassword'])->name("edit_user.password");
+    Route::post('/join-group',[GroupController::class,'joinGroup'])->name('proses.joinGroup');
 });

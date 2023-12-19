@@ -69,6 +69,7 @@ class User extends Authenticatable
     {
         return $this->hasOne(ForgotPassword::class);
     }
+    
     public function pengerjaan()
     {
         return $this->hasMany(Pengerjaan::class);

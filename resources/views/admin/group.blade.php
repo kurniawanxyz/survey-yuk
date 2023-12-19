@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 <div id="modalDetailGroup" class="modal fade" tabindex="-1" aria-labelledby="bs-example-modal-md" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-lg">
       <div class="modal-content">

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Group;
 use App\Models\User;
+use App\Models\UserGroups;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -12,6 +14,41 @@ class GroupController extends Controller
 {
     //
 
+
+    protected function joinGroup(Request $request)
+    {
+        $request->validate([
+            "code" => "string|max:7"
+        ]);
+        try {
+
+            $group = Group::where('code',$request->code)->first();
+
+            if ($group == null) {
+                toastr()->error("Tim tidak ditemukan");
+                return redirect()->back();
+            }
+
+            if(UserGroups::where('group_id',$group->id)->where('user_id',auth()->user()->id)->first()){
+                toastr()->info("Kamu sudah bergabung di group ini");
+                return redirect()->back();
+            }
+
+            UserGroups::create([
+                "user_id" => auth()->user()->id,
+                "group_id" =>$group->id,
+            ]);
+
+            toastr()->success("Berhasil bergabung ke group");
+            return redirect()->back();
+
+        } catch (Exception $th) {
+            toastr()->error($th);
+            return back();
+        }
+
+
+    }
 
     protected function getUserGroup(){
         $groups = Auth::user()->groups;
