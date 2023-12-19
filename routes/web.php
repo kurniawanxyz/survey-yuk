@@ -101,6 +101,6 @@ Route::middleware(['auth',"role:1"])->group(function(){
     Route::post("/selesai-mengerjakan/{survei_id}",[PengerjaanController::class,'selesaiPengerjaan'])->name("selesaiPengerjaan");
 
     // Edit
-    Route::put("/update-profile", [PenggunaController::class, 'updateProfile'])->name("edit_user.profile");
-    Route::put('/update-password', [PenggunaController::class, 'changePassword'])->name("edit_user.password");
+    Route::put("/update-profile-user", [PenggunaController::class, 'updateProfile'])->name("edit_user.profile");
+    Route::put('/update-password-user', [PenggunaController::class, 'changePassword'])->name("edit_user.password");
 });
