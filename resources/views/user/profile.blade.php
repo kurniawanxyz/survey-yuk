@@ -30,11 +30,6 @@
             <div class="text-center">
               <i class="ti ti-file-description fs-6 d-block mb-2"></i>
               <h4 class="mb-0 fw-semibold lh-1">{{Auth::user()->surveis->count()}}</h4>
-              <p class="mb-0 fs-4">Survei</p>
-            </div>
-            <div class="text-center">
-              <i class="ti ti-user-circle fs-6 d-block mb-2"></i>
-              <h4 class="mb-0 fw-semibold lh-1">3,586</h4>
               <p class="mb-0 fs-4">Survei dikerjakan</p>
             </div>
             <div class="text-center">
@@ -83,7 +78,7 @@
       <div class="row">
         <div class="card-body p-3">
             <h5 class="mb-3">Edit Profile</h5>
-            <form action="{{ route('edit.profile') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('edit_user.profile') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method("PUT")
               <div class="row">
@@ -126,7 +121,7 @@
     <div class="tab-pane fade" id="pills-followers" role="tabpanel" aria-labelledby="pills-followers-tab" tabindex="0">
         <div class="card-body">
             <h5 class="mb-3">Ganti Password</h5>
-            <form action="{{ route('edit.password') }}" method="POST">
+            <form action="{{ route('edit_user.password') }}" method="POST">
                 @csrf
                 @method("PUT")
               <div class="row">

@@ -127,7 +127,7 @@
                 <p class="deskripsi-{{$survei->id}} note-inner-content text-truncate" data-notecontent="Blandit tempus porttitor aasfs. Integer posuere erat a ante venenatis.">{{ $survei->deskripsi }}</p>
                 <span onclick="handleTruncate('deskripsi-{{$survei->id}}','btn-handle-truncate-{{$survei->id}}')" style="cursor:pointer" class="btn-handle-truncate-{{$survei->id}} mb-1 badge font-medium bg-light-primary text-primary">Lihat lebih banyak</span>
               </div>
-                <button onclick="handleDetailSurvei('{{$survei->judul}}','{{$survei->deskripsi}}','{{$survei->id}}','{{$survei->kreator->nama}}')" data-bs-toggle="modal" data-bs-target="#detail-survei" class="btn btn-primary mt-2">Detail</button>
+                <button onclick="handleDetailSurvei('{{$survei->judul}}',`{{$survei->deskripsi}}`,'{{$survei->id}}','{{$survei->kreator->nama}}')" data-bs-toggle="modal" data-bs-target="#detail-survei" class="btn btn-primary mt-2">Detail</button>
             </div>
           </div>
         @empty

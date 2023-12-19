@@ -34,7 +34,6 @@ Route::middleware(['guest'])->group(function(){
 
     Route::post('/login-proses',[AuthController::class,'login'])->name('user.login');
     Route::post('/register-proses',[AuthController::class,'register'])->name('user.register');
-
 });
 
 Route::post('/logout',[AuthController::class,'logout'])->name('user.logout');
@@ -100,4 +99,8 @@ Route::middleware(['auth',"role:1"])->group(function(){
 
 
     Route::post("/selesai-mengerjakan/{survei_id}",[PengerjaanController::class,'selesaiPengerjaan'])->name("selesaiPengerjaan");
+
+    // Edit
+    Route::put("/update-profile", [PenggunaController::class, 'updateProfile'])->name("edit_user.profile");
+    Route::put('/update-password', [PenggunaController::class, 'changePassword'])->name("edit_user.password");
 });
