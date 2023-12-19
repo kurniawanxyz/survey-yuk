@@ -105,11 +105,11 @@
                 </a>
               </li>
               <li class="sidebar-item">
-                <a class="sidebar-link" aria-expanded="false">
+                <a href="{{route('user.history')}}" class="sidebar-link" aria-expanded="false">
                   <span>
                     <i class="ti ti-playlist"></i>
                   </span>
-                  <span class="hide-menu">Rekap Nilai</span>
+                  <span class="hide-menu">History</span>
                 </a>
               </li>
             </ul>

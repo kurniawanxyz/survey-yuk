@@ -15,6 +15,18 @@ class GroupController extends Controller
     //
 
 
+   
+    protected function dataDetailGroupUser($group_id){
+        $group = Group::find($group_id);
+        $anggota = $group->users;
+        $surveis = $group->surveis()->with('kreator')->get();
+
+        return response()->json([
+            "anggota" => $anggota,
+            "surveis" => $surveis
+        ]);
+    }
+
     protected function joinGroup(Request $request)
     {
         $request->validate([

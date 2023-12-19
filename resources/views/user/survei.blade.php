@@ -228,6 +228,7 @@ function handleTruncate(className,button){
             const survei_id = $(".btn-kerjakan").attr("data-survei_id");
             location.href = "/pengerjaan/"+survei_id
         })
+        
 
       </script>
 @endSection

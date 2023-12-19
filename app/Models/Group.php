@@ -26,7 +26,7 @@ class Group extends Model
 
     public function surveis():BelongsToMany
     {
-        return $this->belongsToMany(Survei::class,"user_groups");
+        return $this->belongsToMany(Survei::class,"survei_groups");
     }
 
     public function pengerjaan()

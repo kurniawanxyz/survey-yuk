@@ -92,13 +92,17 @@ Route::middleware(['auth',"role:1"])->group(function(){
     Route::get('/user/survei',[SurveiController::class,'index'])->name('user.survei');
     Route::get("/profile-user",fn()=> view('user.profile'))->name('user.profile');
     Route::get("/pengerjaan/{survei_id}",[PengerjaanController::class,'index']);
+    Route::get("/pengerjaan-group/{group_id}/{survei_id}",[PengerjaanController::class,'pengerjaanGroup']);
     Route::get("/group-user",[GroupController::class,'getUserGroup'])->name('user.group');
+    Route::get('/history-nilai',[PengerjaanController::class,'historyNilai'])->name('user.history');
 
     Route::get("/detail-pengerjaan-user/{survei_id}",[PengerjaanController::class,'detailPengerjaanUser']);
-
+    Route::get("/data-detail-group-user/{group_id}",[GroupController::class,'dataDetailGroupUser']);
+    Route::get("/detail-pengerjaan-user-group/{group_id}/{survei_id}",[PengerjaanController::class,'detailPengerjaanUserGroup']);
 
 
     Route::post("/selesai-mengerjakan/{survei_id}",[PengerjaanController::class,'selesaiPengerjaan'])->name("selesaiPengerjaan");
+    Route::post("/selesai-mengerjakan/{survei_id}/{group_id}",[PengerjaanController::class,'selesaiPengerjaanGroup'])->name("selesaiPengerjaanGroup");
 
     // Edit
     Route::put("/update-profile-user", [PenggunaController::class, 'updateProfile'])->name("edit_user.profile");
