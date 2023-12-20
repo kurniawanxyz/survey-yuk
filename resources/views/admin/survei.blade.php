@@ -479,6 +479,7 @@
                 $("#editSurvei").attr("data-survei_id",id)
                 $("#visibilityEdit").val(survei.visibility)
 
+                
                 console.log(survei)
                 $.each(group,(index,data)=>{
                     $.each(survei.groups,(index,group)=>{
