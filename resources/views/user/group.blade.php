@@ -332,18 +332,18 @@ if ($(".detail-penjelasan").hasClass('d-none')) {
             const anggota = res.data.anggota;
             const surveis = res.data.surveis;
             $("#tb-anggota tbody").empty()
-            $("#tb-survei tbody").empty()
             $.each(anggota,(index,data)=>{
                 const element =`
-                    <tr>
-                        <td>${index+1}</td>
-                        <td>${data.nama}</td>
-                        <td>${data.email}</td>
+                <tr>
+                    <td>${index+1}</td>
+                    <td>${data.nama}</td>
+                    <td>${data.email}</td>
                     </tr>
                         `
                 $("#tb-anggota tbody").append(element)
             })
 
+            $("#tb-survei tbody").empty()
             $.each(surveis,(index,data)=>{
                 console.log(data);
                 const element =`

@@ -479,16 +479,19 @@
                 $("#editSurvei").attr("data-survei_id",id)
                 $("#visibilityEdit").val(survei.visibility)
 
-
+                console.log(survei)
                 $.each(group,(index,data)=>{
-                    // console.log(survei.groups.length != 0 && data.nama == survei.groups[index].nama)
-                const status = (survei.groups.length != 0 && data.nama == survei.groups[index].nama ) ? true  : false;
-                  const element = $("<option>").val(data.id).text(data.nama).attr('selected',status );
-                  $("#groupSurveiEdit").append(element)
-                });
+                    $.each(survei.groups,(index,group)=>{
 
 
+                    const status = data.nama == group.nama  ? true  : false;
+                      const element = $("<option>").val(data.id).text(data.nama).attr('selected',status );
+                      $("#groupSurveiEdit").append(element)
+
+
+                    })
             })
+        })
             .catch((err)=>{
                 console.log(err);
             })

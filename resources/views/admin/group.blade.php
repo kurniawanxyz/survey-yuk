@@ -335,7 +335,7 @@
                 $("#nama-group").text(group.nama)
                 $("#deskripsi-group").text(group.deskripsi)
                 $("#group-code").text(group.code)
-
+                $("#tabel-anggota tbody").empty();
                 $.each(anggota,(index,user)=>{
                     const row = $("<tr>").addClass(`anggota-`+user.id)
                     .html(`
@@ -352,7 +352,7 @@
 
                     `);
 
-                    $("#tabel-anggota").append(row);
+                    $("#tabel-anggota tbody").append(row);
                 })
 
 
