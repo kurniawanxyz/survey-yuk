@@ -61,7 +61,10 @@ Route::middleware(['auth','role:2'])->group(function () {
     Route::get("/data-surveyor",[PenggunaController::class,"getdataSurveyor"]);
     Route::get("/profile-surveyor",fn()=> view('admin.profile'))->name('admin.profile');
     Route::get('/data-persetujuan-surveyor',[PenggunaController::class,'getPersetujuanSurveyor']);
-    ROute::get('/data-buat-kriteria/{survei_id}',[KriteriaController::class,'getData']);
+    Route::get('/data-buat-kriteria/{survei_id}',[KriteriaController::class,'getData']);
+    Route::get('/detail-data-survei-di-group/{grub_id}',[GroupController::class,'showDataSurvei']);
+    Route::get('/data-survei-user-by-group/{survei_id}',[SurveiController::class,'showDataUserSurvei']);
+
     // proses create
     Route::post('/create-survei',[SurveiController::class,'create'])->name('create.survei');
     Route::post('/create-pertanyaan',[PertanyaanController::class,'create'])->name('create.pertanyaan');

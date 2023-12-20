@@ -38,7 +38,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama</th>
-                                <th>Action</th>
+                                <th>Email</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -346,8 +346,8 @@
                     <td>
                         ${user.nama}
                     </td>
-                   <td>
-                    <button class="btn btn-danger">Kick</button>
+                    <td>
+                        ${user.email}
                     </td>
 
                     `);

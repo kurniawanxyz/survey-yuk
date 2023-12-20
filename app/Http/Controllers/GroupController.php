@@ -15,7 +15,7 @@ class GroupController extends Controller
     //
 
 
-   
+
     protected function dataDetailGroupUser($group_id){
         $group = Group::find($group_id);
         $anggota = $group->users;
@@ -137,6 +137,12 @@ class GroupController extends Controller
     {
         $group = Group::where('kreator_id',Auth::user()->id)->get();
         return response()->json($group);
+    }
+
+    protected function showDataSurvei($group_id)
+    {
+        $survei = Group::find($group_id)->surveis()->with("pengerjaan")->get();
+        return response()->json($survei);
     }
 
 }

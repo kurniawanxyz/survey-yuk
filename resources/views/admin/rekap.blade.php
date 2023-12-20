@@ -23,6 +23,84 @@
         </div>
     </div>
 
+    <div id="modal-rekap-nilai-grub" class="modal fade" tabindex="-1" aria-labelledby="primary-header-modalLabel"
+                style="display: none;" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header modal-colored-header bg-primary text-white">
+                            <h4 class="modal-title" id="primary-header-modalLabel">
+                               List Survei Berdasarkan Grub
+                            </h4>
+                            <button type="button" class="btn-close"  data-bs-toggle="modal" data-bs-target="#modal-detail-survey" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                           <table id="tb-survei-user-group" class="table table-active">
+                                <thead>
+                                    <tr>
+                                        <td>No</td>
+                                        <td>Nama</td>
+                                        <td>Email</td>
+                                        <td>Nilai</td>
+                                        <td>Kriteria</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                           </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#modal-detail-survey">
+                                Close
+                            </button>
+                            <button type="button" class="btn btn-light-primary text-primary font-medium">
+                                Save changes
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+    <div id="modal-detail-survey" class="modal fade" tabindex="-1" aria-labelledby="primary-header-modalLabel"
+                style="display: none;" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header modal-colored-header bg-primary text-white">
+                            <h4 class="modal-title" id="primary-header-modalLabel">
+                               List Survei Berdasarkan Grub
+                            </h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                           <table id="tb-grub-survei" class="table table-active">
+                                <thead>
+                                    <tr>
+                                        <td>No</td>
+                                        <td>Survei</td>
+                                        <td>Total Dikerjakan</td>
+                                        <td>Aksi</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                           </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+                                Close
+                            </button>
+                            <button type="button" class="btn btn-light-primary text-primary font-medium">
+                                Save changes
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+
     <div class="card overflow-hidden">
         <div class="card-body p-0">
             <ul class="nav nav-pills user-profile-tab justify-content-start bg-light-info rounded-2" id="pills-tab"
@@ -36,7 +114,7 @@
                         <span class="d-none d-md-block">Grup</span>
                     </button>
                 </li>
-                <li class="nav-item" role="presentation">
+                {{-- <li class="nav-item" role="presentation">
                     <button
                         class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6"
                         id="pills-followers-tab" data-bs-toggle="pill" data-bs-target="#pills-followers" type="button"
@@ -44,7 +122,7 @@
                         <i class="ti ti-heart me-2 fs-6"></i>
                         <span class="d-none d-md-block">Public</span>
                     </button>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </div>
@@ -68,7 +146,7 @@
                                 <tr>
                                     <th scope="row">{{ ++$i }}</th>
                                     <td>{{ $item->nama }}</td>
-                                    <td><button type="button" class="btn btn-primary" data-bs-target="#modal-survey-grup" data-bs-toggle="modal">Detail</button></td>
+                                    <td><button onclick="handleDetailSurvei('{{$item->id}}')" type="button" class="btn btn-primary" data-bs-target="#modal-detail-survey" data-bs-toggle="modal">Detail</button></td>
                                 </tr>
                             @empty
                                 <tr>
@@ -117,77 +195,60 @@
                 <!-- /.modal-dialog -->
             </div>
         </div>
-        <div class="tab-pane fade" id="pills-followers" role="tabpanel" aria-labelledby="pills-followers-tab"
-            tabindex="0">
-            <div class="card-body">
-                <h5 class="mb-3">Ganti Password</h5>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Nama Suvey</th>
-                            <th scope="col">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse (Auth::user()->surveis as $i => $item)
-                            <tr>
-                                <th scope="row">{{ ++$i }}</th>
-                                <td>{{ $item->judul }}</td>
-                                <td><button type="button" class="btn btn-primary" data-bs-target="#modal-survey" data-bs-toggle="modal">Detail</button></td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="3" class="text-center">Tidak ada data survey</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-            {{-- Modal --}}
-            <div id="modal-survey" class="modal fade" tabindex="-1" aria-labelledby="primary-header-modalLabel"
-                style="display: none;" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header modal-colored-header bg-primary text-white">
-                            <h4 class="modal-title" id="primary-header-modalLabel">
-                                Modal Heading
-                            </h4>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <h5 class="mt-0">Primary Background</h5>
-                            <p>
-                                Cras mattis consectetur purus sit amet
-                                fermentum. Cras justo odio, dapibus ac facilisis
-                                in, egestas eget quam. Morbi leo risus, porta ac
-                                consectetur ac, vestibulum at eros.
-                            </p>
-                            <p>
-                                Praesent commodo cursus magna, vel scelerisque
-                                nisl consectetur et. Vivamus sagittis lacus vel
-                                augue laoreet rutrum faucibus dolor auctor.
-                            </p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">
-                                Close
-                            </button>
-                            <button type="button" class="btn btn-light-primary text-primary font-medium">
-                                Save changes
-                            </button>
-                        </div>
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
-        </div>
     </div>
+    
 @endsection
 
 @section('script')
+<script src="{{asset('utils/handleKategori.js')}}"></script>
     <script>
-        
+        function handleDetailSurvei(id){
+            axios.get("/detail-data-survei-di-group/"+id)
+            .then(res=>{
+                const survei = res.data;
+                $("#tb-grub-survei tbody").empty()
+                $.each(survei,(i,data)=>{
+
+                    const element = `
+                    <tr>
+                        <td>${i+1}</td>
+                        <td>${data.judul}</td>
+                        <td>${data.pengerjaan.length}</td>
+                        <td>
+                            <button onclick="handleDetailDataSurveiUser('${data.id}')" data-bs-toggle="modal" data-bs-target="#modal-rekap-nilai-grub" class="btn btn-warning">Detail</button>
+                        </td>
+                    </tr>
+                    `
+
+                    $("#tb-grub-survei tbody").append(element)
+                })
+            })
+            .catch(err=>{
+
+            })
+        }
+
+        function handleDetailDataSurveiUser(id){
+            axios.get("/data-survei-user-by-group/"+id)
+            .then(res=>{
+                const survei = res.data;
+                $("#tb-survei-user-group tbody").empty();
+                $.each(survei,(index,data)=>{
+                    const element=`
+                        <tr>
+                            <td>${index+1}</td>
+                            <td>${data.user.nama}</td>
+                            <td>${data.user.email}</td>
+                            <td>${data.nilai}</td>
+                            <td>${handleKriteria(data.survei.kriteria,data.nilai)}</td>
+                        </tr>
+                    `
+                    $("#tb-survei-user-group tbody").append(element);
+                })
+            })
+            .catch(err=>{
+
+            })
+        }
     </script>
 @endsection

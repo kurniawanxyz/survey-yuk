@@ -121,4 +121,11 @@ class SurveiController extends Controller
         return view('user.survei',compact('surveis'));
     }
 
+    protected function  showDataUserSurvei($survei_id)
+    {
+        $survei = Survei::find($survei_id)->pengerjaan()->with(["user","survei.kriteria"])->get();
+        return response()->json($survei);
+    }
+
+
 }
