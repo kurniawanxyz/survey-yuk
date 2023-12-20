@@ -164,27 +164,6 @@
                                     <span id="nilaiTerendah">5</span>
                                 </div>
                           </div>
-
-                          <div class="mt-4 mb-3 d-flex align-items-start gap-2 flex-column">
-                            <div class="kriteria-item d-flex flex-column">
-                                <span class="kriteria-title">Bagus</span>
-                                <span class="badge bg-success text-light">
-                                    Lebih dari 75% nilai maksimal
-                                </span>
-                            </div>
-                            <div class="kriteria-item d-flex flex-column">
-                                <span class="kriteria-title">Sedang</span>
-                                <span class="badge bg-warning text-dark">
-                                    Antara 45% - 75% nilai maksimal
-                                </span>
-                            </div>
-                            <div class="kriteria-item d-flex flex-column">
-                                <span class="kriteria-title">Buruk</span>
-                                <span class="badge bg-danger text-light">
-                                    Kurang dari 45% nilai maksimal
-                                </span>
-                            </div>
-                        </div>
                       </div>
 
                       <form id="formKerjakan" method="get">
@@ -263,7 +242,7 @@
 
 @section('script')
 <script src="{{asset('utils/handleFormatDate.js')}}"></script>
-<script src="{{asset('utils/handleKriteria.js')}}"></script>
+<script src="{{asset('utils/handleKategori.js')}}"></script>
 <script>
 
 function handleTruncate(className,button){
@@ -306,7 +285,7 @@ axios.get(`/detail-pengerjaan-user-group/${group_id}/${id}`)
             <td>${++no}</td>
             <td>${handleFormatDate(data.created_at)}</td>
             <td>${data.nilai}</td>
-            <td>${ handleKriteria(nilaiTertinggi,data.nilai) }</td>
+            <td>${handleKriteria(survei.kriteria,data.nilai) }</td>
         </tr>
         `
         $("#tabelPengerjaan tbody").append(element)

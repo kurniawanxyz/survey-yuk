@@ -13,6 +13,30 @@ use Illuminate\Support\Facades\Validator;
 
 class PenggunaController extends Controller
 {
+
+
+    protected function prosesPersetujuan(Request $request,$id)
+    {
+        // dd($request);
+        $user = User::find($id);
+        try {
+            if($request->status == "disetujui")
+            {
+                $user->update([
+                    "persetujuan_surveyor" => "disetujui"
+                ]);
+                return response()->json(["message"=>"Berhasil mensetujui penngguna menjadi surveyor"]);
+            }else{
+                $user->update([
+                    "persetujuan_surveyor" => "ditolak"
+                ]);
+                return response()->json(["message"=>"Berhasil menolak pengguna menjadi surveor"]);
+            }
+        } catch (Exception $th) {
+            return response()->json(["message"=>$th]);
+        }
+    }
+
     //
     protected function createUser(Request $request)
     {
@@ -66,6 +90,7 @@ class PenggunaController extends Controller
             "email" => $request->email,
             "password" => Hash::make($request->password),
             "role_id" => 2,
+            "persetujuan_surveyor" => "disetujui",
         ]);
 
         return response()->json(["message" => "Berhasil membuat surveyor"]);
@@ -94,9 +119,17 @@ class PenggunaController extends Controller
 
     protected function getDataSurveyor()
     {
-        $user = User::where("role_id", 2)->get();
+        $user = User::where("role_id", 2)->where('persetujuan_surveyor','disetujui')->get();
         return response()->json($user);
     }
+
+    protected function getPersetujuanSurveyor()
+    {
+        $user = User::where('role_id',2)->where('persetujuan_surveyor','menunggu')->get();
+        return response()->json($user);
+    }
+
+
 
     protected function deleteSurveyor($id)
     {

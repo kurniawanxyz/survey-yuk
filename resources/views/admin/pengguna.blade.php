@@ -137,22 +137,23 @@
               <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item" role="presentation">
                   <a class="nav-link d-flex active" data-bs-toggle="tab" href="#home2" role="tab" aria-selected="true">
-                    <span><i class="ti ti-home-2 fs-4"></i>
+                    <span><i class="ti ti-user fs-4"></i>
                     </span>
                     <span class="d-none d-md-block ms-2">Pengguna</span>
                   </a>
                 </li>
                 <li class="nav-item" role="presentation">
                   <a class="nav-link d-flex" data-bs-toggle="tab" href="#profile2" role="tab" aria-selected="false" tabindex="-1">
-                    <span><i class="ti ti-user fs-4"></i>
+                    <span><i class="ti ti-user-bolt fs-4"></i>
                     </span>
                     <span class="d-none d-md-block ms-2">Surveyor</span>
                   </a>
                 </li>
                 <li class="nav-item" role="presentation">
                   <a class="nav-link d-flex" data-bs-toggle="tab" href="#messages2" role="tab" aria-selected="false" tabindex="-1">
-                    <span><i class="ri-chat-4-line"></i> </span>
-                    <span class="d-none d-md-block ms-2">Persetujuan Surveyor</span>
+                    <span><i class="ti ti-checklist fs-4"></i>
+                    </span>
+                    <span class="d-none d-md-block ms-2">Surveyor</span>
                   </a>
                 </li>
               </ul>
@@ -358,7 +359,72 @@ function handlePermission(status,id){
     })
 }
 
+getPersetujuanSurveyor()
+function handleSetujui(id)
+{
+    const status = "disetujui";
+    axios.put("/proses-persetujuan/"+id,{status})
+    .then(res=>{
+        toastr.success(res.data.message)
+        getPersetujuanSurveyor()
+        getSurveyor()
+    })
+    .catch(err=>{
+        console.log(err)
+        getPersetujuanSurveyor()
+        for (let i = 0; i < err.response.data.errors.length; i++) {
+                const element = err.response.data.errors[i];
+                toastr.error(element)
+        }
+    })
+}
 
+function handleDitolak(id)
+{
+    const status = "ditolak";
+    axios.put("/proses-persetujuan/"+id,{status})
+    .then(res=>{
+        toastr.success(res.data.message)
+        getPersetujuanSurveyor()
+    })
+    .catch(err=>{
+        console.log(err)
+        getPersetujuanSurveyor()
+        for (let i = 0; i < err.response.data.errors.length; i++) {
+                const element = err.response.data.errors[i];
+                toastr.error(element)
+        }
+    })
+}
+
+function getPersetujuanSurveyor()
+{
+    axios.get("/data-persetujuan-surveyor")
+    .then((res)=>{
+        $("#tabel-persetujuan tbody").empty()
+      const user = res.data;
+
+      $.each(user,(index,data)=>{
+
+            const element = `
+            <tr>
+                <td>${index+1}</td>
+                <td>${data.nama}</td>
+                <td>${data.email}</td>
+                <td>
+                    <button onclick="handleSetujui('${data.id}')" class="btn btn-success">Setujui</button>
+                    <button onclick="handleDitolak('${data.id}')" class="btn btn-danger">tolak</button>
+                </td>
+            </tr>
+            `
+            $("#tabel-persetujuan tbody").append(element);
+      })
+
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+}
 
 function getSurveyor(){
     axios.get("/data-surveyor")

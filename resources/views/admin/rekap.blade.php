@@ -86,30 +86,29 @@
                     <div class="modal-content">
                         <div class="modal-header modal-colored-header bg-primary text-white">
                             <h4 class="modal-title" id="primary-header-modalLabel">
-                                Modal Heading
+                                Rekap Nilai
                             </h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <h5 class="mt-0">Primary Background</h5>
-                            <p>
-                                Cras mattis consectetur purus sit amet
-                                fermentum. Cras justo odio, dapibus ac facilisis
-                                in, egestas eget quam. Morbi leo risus, porta ac
-                                consectetur ac, vestibulum at eros.
-                            </p>
-                            <p>
-                                Praesent commodo cursus magna, vel scelerisque
-                                nisl consectetur et. Vivamus sagittis lacus vel
-                                augue laoreet rutrum faucibus dolor auctor.
-                            </p>
+                            <table class="tb-rekap table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <td>No</td>
+                                        <td>Nama</td>
+                                        <td>Email</td>
+                                        <td>Nilai</td>
+                                        <td>Kriteria</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">
                                 Close
-                            </button>
-                            <button type="button" class="btn btn-light-primary text-primary font-medium">
-                                Save changes
                             </button>
                         </div>
                     </div>
@@ -184,315 +183,11 @@
                 <!-- /.modal-dialog -->
             </div>
         </div>
-        <div class="tab-pane fade" id="pills-gallery" role="tabpanel" aria-labelledby="pills-gallery-tab"
-            tabindex="0">
-            <div class="d-sm-flex align-items-center justify-content-between mt-3 mb-4">
-                <h3 class="mb-3 mb-sm-0 fw-semibold d-flex align-items-center">Gallery <span
-                        class="badge text-bg-secondary fs-2 rounded-4 py-1 px-2 ms-2">12</span></h3>
-                <form class="position-relative">
-                    <input type="text" class="form-control search-chat py-2 ps-5" id="text-srh"
-                        placeholder="Search Friends">
-                    <i class="ti ti-search position-absolute top-50 start-0 translate-middle-y text-dark ms-3"></i>
-                </form>
-            </div>
-            <div class="row">
-                <div class="col-md-6 col-lg-4">
-                    <div class="card hover-img overflow-hidden rounded-2">
-                        <div class="card-body p-0">
-                            <img src="../../dist/images/products/s1.jpg" alt=""
-                                class="img-fluid w-100 object-fit-cover" style="height: 220px;">
-                            <div class="p-4 d-flex align-items-center justify-content-between">
-                                <div>
-                                    <h6 class="fw-semibold mb-0 fs-4">Isuava wakceajo fe.jpg</h6>
-                                    <span class="text-dark fs-2">Wed, Dec 14, 2023</span>
-                                </div>
-                                <div class="dropdown">
-                                    <a class="text-muted fw-semibold d-flex align-items-center p-1"
-                                        href="javascript:void(0)" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i class="ti ti-dots-vertical"></i>
-                                    </a>
-                                    <ul class="dropdown-menu overflow-hidden">
-                                        <li><a class="dropdown-item" href="javascript:void(0)">Isuava wakceajo fe.jpg</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card hover-img overflow-hidden rounded-2">
-                        <div class="card-body p-0">
-                            <img src="../../dist/images/products/s2.jpg" alt=""
-                                class="img-fluid w-100 object-fit-cover" style="height: 220px;">
-                            <div class="p-4 d-flex align-items-center justify-content-between">
-                                <div>
-                                    <h6 class="fw-semibold mb-0 fs-4">Ip docmowe vemremrif.jpg</h6>
-                                    <span class="text-dark fs-2">Wed, Dec 14, 2023</span>
-                                </div>
-                                <div class="dropdown">
-                                    <a class="text-muted fw-semibold d-flex align-items-center p-1"
-                                        href="javascript:void(0)" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i class="ti ti-dots-vertical"></i>
-                                    </a>
-                                    <ul class="dropdown-menu overflow-hidden">
-                                        <li><a class="dropdown-item" href="javascript:void(0)">Ip docmowe
-                                                vemremrif.jpg</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card hover-img overflow-hidden rounded-2">
-                        <div class="card-body p-0">
-                            <img src="../../dist/images/products/s3.jpg" alt=""
-                                class="img-fluid w-100 object-fit-cover" style="height: 220px;">
-                            <div class="p-4 d-flex align-items-center justify-content-between">
-                                <div>
-                                    <h6 class="fw-semibold mb-0 fs-4">Duan cosudos utaku.jpg</h6>
-                                    <span class="text-dark fs-2">Wed, Dec 14, 2023</span>
-                                </div>
-                                <div class="dropdown">
-                                    <a class="text-muted fw-semibold d-flex align-items-center p-1"
-                                        href="javascript:void(0)" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i class="ti ti-dots-vertical"></i>
-                                    </a>
-                                    <ul class="dropdown-menu overflow-hidden">
-                                        <li><a class="dropdown-item" href="javascript:void(0)">Duan cosudos utaku.jpg</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card hover-img overflow-hidden rounded-2">
-                        <div class="card-body p-0">
-                            <img src="../../dist/images/products/s4.jpg" alt=""
-                                class="img-fluid w-100 object-fit-cover" style="height: 220px;">
-                            <div class="p-4 d-flex align-items-center justify-content-between">
-                                <div>
-                                    <h6 class="fw-semibold mb-0 fs-4">Fu netbuv oggu.jpg</h6>
-                                    <span class="text-dark fs-2">Wed, Dec 14, 2023</span>
-                                </div>
-                                <div class="dropdown">
-                                    <a class="text-muted fw-semibold d-flex align-items-center p-1"
-                                        href="javascript:void(0)" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i class="ti ti-dots-vertical"></i>
-                                    </a>
-                                    <ul class="dropdown-menu overflow-hidden">
-                                        <li><a class="dropdown-item" href="javascript:void(0)">Fu netbuv oggu.jpg</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card hover-img overflow-hidden rounded-2">
-                        <div class="card-body p-0">
-                            <img src="../../dist/images/products/s5.jpg" alt=""
-                                class="img-fluid w-100 object-fit-cover" style="height: 220px;">
-                            <div class="p-4 d-flex align-items-center justify-content-between">
-                                <div>
-                                    <h6 class="fw-semibold mb-0 fs-4">Di sekog do.jpg</h6>
-                                    <span class="text-dark fs-2">Wed, Dec 14, 2023</span>
-                                </div>
-                                <div class="dropdown">
-                                    <a class="text-muted fw-semibold d-flex align-items-center p-1"
-                                        href="javascript:void(0)" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i class="ti ti-dots-vertical"></i>
-                                    </a>
-                                    <ul class="dropdown-menu overflow-hidden">
-                                        <li><a class="dropdown-item" href="javascript:void(0)">Di sekog do.jpg</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card hover-img overflow-hidden rounded-2">
-                        <div class="card-body p-0">
-                            <img src="../../dist/images/products/s6.jpg" alt=""
-                                class="img-fluid w-100 object-fit-cover" style="height: 220px;">
-                            <div class="p-4 d-flex align-items-center justify-content-between">
-                                <div>
-                                    <h6 class="fw-semibold mb-0 fs-4">Lo jogu camhiisi.jpg</h6>
-                                    <span class="text-dark fs-2">Thu, Dec 15, 2023</span>
-                                </div>
-                                <div class="dropdown">
-                                    <a class="text-muted fw-semibold d-flex align-items-center p-1"
-                                        href="javascript:void(0)" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i class="ti ti-dots-vertical"></i>
-                                    </a>
-                                    <ul class="dropdown-menu overflow-hidden">
-                                        <li><a class="dropdown-item" href="javascript:void(0)">Lo jogu camhiisi.jpg</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card hover-img overflow-hidden rounded-2">
-                        <div class="card-body p-0">
-                            <img src="../../dist/images/products/s7.jpg" alt=""
-                                class="img-fluid w-100 object-fit-cover" style="height: 220px;">
-                            <div class="p-4 d-flex align-items-center justify-content-between">
-                                <div>
-                                    <h6 class="fw-semibold mb-0 fs-4">Orewac huosazud robuf.jpg</h6>
-                                    <span class="text-dark fs-2">Fri, Dec 16, 2023</span>
-                                </div>
-                                <div class="dropdown">
-                                    <a class="text-muted fw-semibold d-flex align-items-center p-1"
-                                        href="javascript:void(0)" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i class="ti ti-dots-vertical"></i>
-                                    </a>
-                                    <ul class="dropdown-menu overflow-hidden">
-                                        <li><a class="dropdown-item" href="javascript:void(0)">Orewac huosazud
-                                                robuf.jpg</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card hover-img overflow-hidden rounded-2">
-                        <div class="card-body p-0">
-                            <img src="../../dist/images/products/s8.jpg" alt=""
-                                class="img-fluid w-100 object-fit-cover" style="height: 220px;">
-                            <div class="p-4 d-flex align-items-center justify-content-between">
-                                <div>
-                                    <h6 class="fw-semibold mb-0 fs-4">Nira biolaizo tuzi.jpg</h6>
-                                    <span class="text-dark fs-2">Sat, Dec 17, 2023</span>
-                                </div>
-                                <div class="dropdown">
-                                    <a class="text-muted fw-semibold d-flex align-items-center p-1"
-                                        href="javascript:void(0)" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i class="ti ti-dots-vertical"></i>
-                                    </a>
-                                    <ul class="dropdown-menu overflow-hidden">
-                                        <li><a class="dropdown-item" href="javascript:void(0)">Nira biolaizo tuzi.jpg</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card hover-img overflow-hidden rounded-2">
-                        <div class="card-body p-0">
-                            <img src="../../dist/images/products/s9.jpg" alt=""
-                                class="img-fluid w-100 object-fit-cover" style="height: 220px;">
-                            <div class="p-4 d-flex align-items-center justify-content-between">
-                                <div>
-                                    <h6 class="fw-semibold mb-0 fs-4">Peri metu ejvu.jpg</h6>
-                                    <span class="text-dark fs-2">Sun, Dec 18, 2023</span>
-                                </div>
-                                <div class="dropdown">
-                                    <a class="text-muted fw-semibold d-flex align-items-center p-1"
-                                        href="javascript:void(0)" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i class="ti ti-dots-vertical"></i>
-                                    </a>
-                                    <ul class="dropdown-menu overflow-hidden">
-                                        <li><a class="dropdown-item" href="javascript:void(0)">Peri metu ejvu.jpg</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card hover-img overflow-hidden rounded-2">
-                        <div class="card-body p-0">
-                            <img src="../../dist/images/products/s10.jpg" alt=""
-                                class="img-fluid w-100 object-fit-cover" style="height: 220px;">
-                            <div class="p-4 d-flex align-items-center justify-content-between">
-                                <div>
-                                    <h6 class="fw-semibold mb-0 fs-4">Vurnohot tajraje isusufuj.jpg</h6>
-                                    <span class="text-dark fs-2">Mon, Dec 19, 2023</span>
-                                </div>
-                                <div class="dropdown">
-                                    <a class="text-muted fw-semibold d-flex align-items-center p-1"
-                                        href="javascript:void(0)" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i class="ti ti-dots-vertical"></i>
-                                    </a>
-                                    <ul class="dropdown-menu overflow-hidden">
-                                        <li><a class="dropdown-item" href="javascript:void(0)">Vurnohot tajraje
-                                                isusufuj.jpg</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card hover-img overflow-hidden rounded-2">
-                        <div class="card-body p-0">
-                            <img src="../../dist/images/products/s11.jpg" alt=""
-                                class="img-fluid w-100 object-fit-cover" style="height: 220px;">
-                            <div class="p-4 d-flex align-items-center justify-content-between">
-                                <div>
-                                    <h6 class="fw-semibold mb-0 fs-4">Juc oz ma.jpg</h6>
-                                    <span class="text-dark fs-2">Tue, Dec 20, 2023</span>
-                                </div>
-                                <div class="dropdown">
-                                    <a class="text-muted fw-semibold d-flex align-items-center p-1"
-                                        href="javascript:void(0)" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i class="ti ti-dots-vertical"></i>
-                                    </a>
-                                    <ul class="dropdown-menu overflow-hidden">
-                                        <li><a class="dropdown-item" href="javascript:void(0)">Juc oz ma.jpg</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card hover-img overflow-hidden rounded-2">
-                        <div class="card-body p-0">
-                            <img src="../../dist/images/products/s12.jpg" alt=""
-                                class="img-fluid w-100 object-fit-cover" style="height: 220px;">
-                            <div class="p-4 d-flex align-items-center justify-content-between">
-                                <div>
-                                    <h6 class="fw-semibold mb-0 fs-4">Povipvez marjelliz zuuva.jpg</h6>
-                                    <span class="text-dark fs-2">Wed, Dec 21, 2023</span>
-                                </div>
-                                <div class="dropdown">
-                                    <a class="text-muted fw-semibold d-flex align-items-center p-1"
-                                        href="javascript:void(0)" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i class="ti ti-dots-vertical"></i>
-                                    </a>
-                                    <ul class="dropdown-menu overflow-hidden">
-                                        <li><a class="dropdown-item" href="javascript:void(0)">Povipvez marjelliz
-                                                zuuva.jpg</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        
+    </script>
 @endsection

@@ -134,7 +134,7 @@ class PengerjaanController extends Controller
 
     protected function detailPengerjaanUserGroup($group_id,$survei_id){
         $pengerjaan = Auth::user()->pengerjaan->where('group_id',$group_id)->where('survei_id',$survei_id);
-        $survei = Survei::with('pertanyaan')->find($survei_id);
+        $survei = Survei::with('pertanyaan','kriteria')->find($survei_id);
         $avgNilai = number_format(Pengerjaan::where('survei_id',$survei_id)->where('group_id',$group_id)->avg('nilai'),1);
         $nilaiTerendah = $survei->pertanyaan->count();
         // dd($avgNilai);

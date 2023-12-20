@@ -36,4 +36,9 @@ class Survei extends Model
         return $this->hasMany(Pengerjaan::class);
     }
 
+    public function kriteria()
+    {
+        return $this->hasMany(Kriteria::class);
+    }
+
 }

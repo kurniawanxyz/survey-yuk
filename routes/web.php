@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\PengerjaanController;
 use App\Http\Controllers\PertanyaanController;
 use App\Http\Controllers\SurveiController;
 use App\Http\Controllers\PenggunaController;
+use App\Models\Kriteria;
 use App\Models\Pengerjaan;
 use App\Models\Survei;
 use Illuminate\Support\Facades\Auth;
@@ -58,13 +60,15 @@ Route::middleware(['auth','role:2'])->group(function () {
     Route::get("/data-user",[PenggunaController::class,'getDataUser']);
     Route::get("/data-surveyor",[PenggunaController::class,"getdataSurveyor"]);
     Route::get("/profile-surveyor",fn()=> view('admin.profile'))->name('admin.profile');
-
+    Route::get('/data-persetujuan-surveyor',[PenggunaController::class,'getPersetujuanSurveyor']);
+    ROute::get('/data-buat-kriteria/{survei_id}',[KriteriaController::class,'getData']);
     // proses create
     Route::post('/create-survei',[SurveiController::class,'create'])->name('create.survei');
     Route::post('/create-pertanyaan',[PertanyaanController::class,'create'])->name('create.pertanyaan');
     Route::post('/create-group',[GroupController::class,'create'])->name("create.group");
     Route::post('/tambah-user', [PenggunaController::class,'createUser'])->name("create.user");
     Route::post('/tambah-surveyor', [PenggunaController::class,'createSurveyor'])->name("create.surveyor");
+    Route::post("/create-kriteria",[KriteriaController::class,'createKriteria'])->name('create.kriteria');
 
     // proses edit
     Route::put('/update-survei/{id}',[SurveiController::class,'edit']);
@@ -73,6 +77,7 @@ Route::middleware(['auth','role:2'])->group(function () {
     Route::put("/update-permission",[PenggunaController::class,'changePermission']);
     Route::put("/update-profile",[PenggunaController::class,'updateProfile'])->name("edit.profile");
     Route::put('/update-password',[PenggunaController::class,'changePassword'])->name("edit.password");
+    Route::put('/proses-persetujuan/{id}',[PenggunaController::class,'prosesPersetujuan']);
 
     // proses delete
     Route::delete('/delete-survei/{id}',[SurveiController::class,'delete']);
@@ -103,9 +108,9 @@ Route::middleware(['auth',"role:1"])->group(function(){
 
     Route::post("/selesai-mengerjakan/{survei_id}",[PengerjaanController::class,'selesaiPengerjaan'])->name("selesaiPengerjaan");
     Route::post("/selesai-mengerjakan/{survei_id}/{group_id}",[PengerjaanController::class,'selesaiPengerjaanGroup'])->name("selesaiPengerjaanGroup");
+    Route::post('/join-group',[GroupController::class,'joinGroup'])->name('proses.joinGroup');
 
     // Edit
     Route::put("/update-profile-user", [PenggunaController::class, 'updateProfile'])->name("edit_user.profile");
     Route::put('/update-password-user', [PenggunaController::class, 'changePassword'])->name("edit_user.password");
-    Route::post('/join-group',[GroupController::class,'joinGroup'])->name('proses.joinGroup');
 });

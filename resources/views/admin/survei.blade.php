@@ -40,6 +40,136 @@
 
 
 
+<div id="aturKriteria" class="modal fade" tabindex="-1" aria-labelledby="tambahSurveiLabel" style="display: none;" aria-hidden="true">
+    <form action="{{ route('create.kriteria') }}" method="post">
+        @csrf
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header modal-colored-header bg-primary text-white">
+        <h4 class="modal-title" id="tambahSurveiLabel">
+          Atur Kriteria
+        </h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body row">
+           <div class="col-12 mt-3">
+            <div class="mt-3">
+                <input type="hidden" name="survei_id" value="" id="survei_id">
+                <span>Kriteria 1</span>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="form-label" for="text1">Text</label>
+                        <input type="text" name="text1" id="text1" class="form-control">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label" for="nilaiMaks1">Nilai Maks</label>
+                        <input type="number" name="nilaiMaks1" id="nilaiMaks1" class="form-control" min="0" readonly>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label" for="nilaiMin1">Nilai Min</label>
+                        <input type="number" name="nilaiMin1" id="nilaiMin1" class="form-control" min="0">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label" for="style1">Style</label>
+                        <select class="form-control" name="style1" id="style1">
+                          <option value="hijau">Hijau</option>
+                          <option value="kuning">Kuning</option>
+                          <option value="merah">Merah</option>
+                          <option value="biru">Biru</option>
+                        </select>
+                    </div>
+                </div>
+                <span>Kriteria 2</span>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="form-label" for="text2">Text</label>
+                        <input type="text" name="text2" id="text2" class="form-control">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label" for="nilaiMaks2">Nilai Maks</label>
+                        <input type="number" name="nilaiMaks2" id="nilaiMaks2" class="form-control" min="0" readonly>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label" for="nilaiMin2">Nilai Min</label>
+                        <input type="number" name="nilaiMin2" id="nilaiMin2" class="form-control" min="0">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label" for="style2">Style</label>
+                        <select class="form-control" name="style2" id="style2">
+                          <option value="hijau">Hijau</option>
+                          <option value="kuning">Kuning</option>
+                          <option value="merah">Merah</option>
+                          <option value="biru">Biru</option>
+                        </select>
+                    </div>
+                </div>
+                <span>Kriteria 3</span>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="form-label" for="text3">Text</label>
+                        <input type="text" name="text3" id="text3" class="form-control">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label" for="nilaiMaks3">Nilai Maks</label>
+                        <input type="number" name="nilaiMaks3" id="nilaiMaks3" class="form-control" min="0">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label" for="nilaiMin3">Nilai Min</label>
+                        <input type="number" name="nilaiMin3" id="nilaiMin3" class="form-control" min="0">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label" for="style3">Style</label>
+                        <select class="form-control" name="style3" id="style3">
+                          <option value="hijau">Hijau</option>
+                          <option value="kuning">Kuning</option>
+                          <option value="merah">Merah</option>
+                          <option value="biru">Biru</option>
+                        </select>
+                    </div>
+                </div>
+                <span>Kriteria 4</span>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="form-label" for="text4">Text</label>
+                        <input type="text" name="text4" id="text4" class="form-control">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label" for="nilaiMaks4">Nilai Maks</label>
+                        <input type="number" name="nilaiMaks4" id="nilaiMaks4" class="form-control" min="0" readonly>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label" for="nilaiMin4">Nilai min</label>
+                        <input type="number" name="nilaiMin4" id="nilaiMin4" class="form-control" min="0">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label" for="style4">Style</label>
+                        <select class="form-control" name="style4" id="style4">
+                          <option value="hijau">Hijau</option>
+                          <option value="kuning">Kuning</option>
+                          <option value="merah">Merah</option>
+                          <option value="biru">Biru</option>
+                        </select>
+                    </div>
+                </div>
+             </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+                Close
+            </button>
+            <button type="submit" class="btn btn-submit btn-light-primary text-primary font-medium">
+                Save changes
+            </button>
+        </div>
+    </div>
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
+</form>
+</div>
+
 <div id="tambahSurvei" class="modal fade" tabindex="-1" aria-labelledby="tambahSurveiLabel" style="display: none;" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg">
     <div class="modal-content">
@@ -60,6 +190,9 @@
               <label class="form-label" for="Deskripsi">Deskripsi Survei</label>
               <textarea class="form-control" style="resize: none" name="deskripsi" id="Deskripsi" cols="10" rows="10"></textarea>
           </div>
+
+
+
           <div class="col-12 mt-3">
             <label class="form-label" for="visibility">Visibility</label>
             <select class="form-control form-select" name="visibility" id="visibility">
@@ -113,6 +246,9 @@
               <label class="form-label" for="edit-Deskripsi">Deskripsi Survei</label>
               <textarea class="form-control" style="resize: none" name="deskripsi" id="edit-Deskripsi" cols="10" rows="10"></textarea>
           </div>
+
+
+
           <div class="col-12 mt-3">
             <label class="form-label" for="visibilityEdit">Visibility</label>
             <select class="form-control form-select" name="visibilityEdit" id="visibilityEdit">
@@ -121,6 +257,8 @@
                 <option value="private">Private</option>
             </select>
           </div>
+
+
 
           <div class="col-12 my-3 option-private-edit d-flex flex-column ">
             <label class="form-label" for="groupSurvei">Group</label>
@@ -252,6 +390,7 @@
                             ${status}
                           </div>
                            ${button}
+
                         </div>
                       </div>
                       `
@@ -261,6 +400,28 @@
             })
             .catch((err)=>{
                 console.log(err)
+            })
+        }
+
+        $("#nilaiMin1").on('input',function(){
+            // toastr.info( ($("#nilaiMaks1").val() >= $(this).val() ))
+            $("#nilaiMaks2").val($(this).val());
+        })
+
+        $("#nilaiMin2").on('input',function(){
+            // toastr.info( ($("#nilaiMaks1").val() >= $(this).val() ))
+            $("#nilaiMaks3").val($(this).val());
+        })
+
+        function handleAturKriteria(id){
+            axios.get("/data-buat-kriteria/"+id)
+            .then(res=>{
+                const nilaiMaks = res.data;
+                $("#survei_id").val(id);
+                $("#nilaiMaks1").val(nilaiMaks)
+            })
+            .catch(err=>{
+
             })
         }
 
@@ -320,7 +481,9 @@
 
 
                 $.each(group,(index,data)=>{
-                  const element = $("<option>").val(data.id).text(data.nama).attr("selected",data.nama === survei.groups[index].nama);
+                    // console.log(survei.groups.length != 0 && data.nama == survei.groups[index].nama)
+                const status = (survei.groups.length != 0 && data.nama == survei.groups[index].nama ) ? true  : false;
+                  const element = $("<option>").val(data.id).text(data.nama).attr('selected',status );
                   $("#groupSurveiEdit").append(element)
                 });
 
